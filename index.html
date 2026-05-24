@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הובלה בקליק – הובלות מקצועיות בישראל | 055-273-6930</title>
+  <meta name="description" content="הובלות מקצועיות + אריזה + סידור מלא. קבלו הצעת מחיר תוך 10 דקות. 500 לקוחות מרוצים. זמינים גם מחר בבוקר.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:       #FF5722;
+      --orange-light: #FF7043;
+      --orange-dark:  #E64A19;
+      --orange-bg:    #FFF3E0;
+      --navy:         #0D1B2A;
+      --navy2:        #1A2744;
+      --green:        #25D366;
+      --white:        #FFFFFF;
+      --gray-bg:      #F5F7FA;
+      --gray:         #6B7280;
+      --border:       #E5E7EB;
+      --text:         #111827;
+      --radius-card:  16px;
+      --shadow-card:  0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      direction: rtl;
+      background: #fff;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────
+       TOP BAR (sticky)
+    ───────────────────────────── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--navy);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.35);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--orange); }
+
+    .top-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-cta a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .top-cta .call-btn {
+      background: var(--orange);
+      color: #fff;
+    }
+    .top-cta .call-btn:hover { background: var(--orange-dark); transform: scale(1.03); }
+
+    .top-cta .wa-btn {
+      background: var(--green);
+      color: #fff;
+    }
+    .top-cta .wa-btn:hover { opacity: 0.9; transform: scale(1.03); }
+
+    /* ─────────────────────────────
+       HERO
+    ───────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Ken Burns background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      animation: kenburns 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes kenburns {
+      0%   { transform: scale(1)    translateX(0); }
+      100% { transform: scale(1.08) translateX(-20px); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(
+        120deg,
+        rgba(13,27,42,0.93) 0%,
+        rgba(13,27,42,0.80) 55%,
+        rgba(13,27,42,0.60) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 60px 24px 70px;
+      display: flex;
+      align-items: flex-start;
+      gap: 48px;
+    }
+
+    /* ── Right col: text + buttons ── */
+    .hero-text {
+      flex: 1;
+      color: #fff;
+      padding-top: 8px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,87,34,0.18);
+      border: 1px solid rgba(255,87,34,0.45);
+      color: #FFB74D;
+      padding: 5px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-h1 {
+      font-size: clamp(30px, 3.8vw, 48px);
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero-h1 .line2 {
+      display: block;
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 34px;
+      font-weight: 400;
+      max-width: 460px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 300px;
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.32);
+      transition: all 0.2s;
+    }
+    .btn-wa:hover { opacity: 0.92; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+
+    .btn-call {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 17px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+    .btn-call:hover { background: #F0F4FF; transform: translateY(-2px); }
+
+    /* Bullet list below buttons */
+    .hero-bullets {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .hero-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.45;
+    }
+    .hero-bullet .chk {
+      color: var(--orange);
+      font-size: 17px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Left col: lead form ── */
+    .hero-form-wrap {
+      width: 360px;
+      flex-shrink: 0;
+    }
+
+    .hero-form {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 32px;
+      min-height: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.30), 0 4px 16px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-title {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .form-speed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--orange-bg);
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 50px;
+      width: fit-content;
+      margin: 8px auto 22px;
+    }
+    .form-speed-badge-wrap { text-align: center; }
+
+    .form-field {
+      margin-bottom: 13px;
+    }
+    .form-field input,
+    .form-field select {
+      width: 100%;
+      padding: 15px 18px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Assistant', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: #FAFAFA;
+      direction: rtl;
+      transition: border-color 0.2s, background 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+    }
+    .form-field input:focus,
+    .form-field select:focus {
+      outline: none;
+      border-color: var(--orange);
+      background: #fff;
+    }
+    .form-field input::placeholder { color: #9CA3AF; }
+
+    .form-submit { margin-top: auto; padding-top: 8px; }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      color: #fff;
+      border: none;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Assistant', sans-serif;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(255,87,34,0.35);
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,87,34,0.45); }
+    .btn-submit:active { transform: translateY(0); }
+
+    .form-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 10px;
+    }
+
+    /* ─────────────────────────────
+       TRUST BAR
+    ───────────────────────────── */
+    .trust-bar {
+      background: linear-gradient(135deg, var(--navy), var(--navy2));
+      padding: 18px 24px;
+    }
+
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 18px;
+      white-space: nowrap;
+    }
+    .trust-item strong {
+      color: var(--orange);
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .trust-sep {
+      width: 1px;
+      height: 28px;
+      background: rgba(255,255,255,0.18);
+      flex-shrink: 0;
+    }
+
+    /* ─────────────────────────────
+       SECTIONS (shared)
+    ───────────────────────────── */
+    .section {
+      padding: 72px 24px;
+    }
+    .section-alt { background: var(--gray-bg); }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: var(--orange-bg);
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .section-h2 {
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--gray);
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────
+       WHY US GRID
+    ───────────────────────────── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .why-card {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 28px 24px;
+      transition: all 0.25s;
+    }
+    .why-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 8px 28px rgba(255,87,34,0.12);
+      transform: translateY(-5px);
+    }
+    .why-icon {
+      font-size: 36px;
+      display: block;
+      margin-bottom: 14px;
+    }
+    .why-h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .why-p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    /* ─────────────────────────────
+       SERVICES GRID
+    ───────────────────────────── */
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+    }
+
+    .srv-card {
+      background: #fff;
+      border-radius: var(--radius-card);
+      padding: 26px 22px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: transform 0.2s;
+    }
+    .srv-card:hover { transform: translateY(-4px); }
+
+    .srv-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--orange-bg);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .srv-h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .srv-p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────
+       TESTIMONIALS
+    ───────────────────────────── */
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .test-card {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 28px 26px;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .test-card:hover { box-shadow: var(--shadow-card); }
+
+    .quote-icon {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      font-size: 56px;
+      line-height: 1;
+      color: #F3F4F6;
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+
+    .stars { color: #F59E0B; font-size: 17px; letter-spacing: 2px; margin-bottom: 12px; }
+
+    .test-text {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.75;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+    .author-loc  { font-size: 13px; color: var(--gray); }
+
+    /* ─────────────────────────────
+       FAQ
+    ───────────────────────────── */
+    .faq-list {
+      margin: 40px auto 0;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--orange); }
+
+    .faq-q {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      user-select: none;
+    }
+    .faq-q span:first-child { flex: 1; }
+
+    .faq-plus {
+      font-size: 24px;
+      color: var(--orange);
+      flex-shrink: 0;
+      margin-right: 12px;
+      transition: transform 0.3s;
+      font-weight: 400;
+    }
+    .faq-item.open .faq-plus { transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.75;
+      transition: max-height 0.38s ease, padding 0.2s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 220px;
+      padding-bottom: 22px;
+    }
+
+    /* ─────────────────────────────
+       BOTTOM CTA STRIP
+    ───────────────────────────── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--navy) 0%, #1E3A5F 100%);
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .cta-strip h2 {
+      font-size: clamp(24px, 3.2vw, 40px);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .cta-strip p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.80);
+      margin-bottom: 36px;
+    }
+    .cta-btns {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ─────────────────────────────
+       FOOTER
+    ───────────────────────────── */
+    footer {
+      background: #070F1C;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.42); }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+    footer a:hover { color: var(--orange); }
+
+    /* ─────────────────────────────
+       SCROLL REVEAL
+    ───────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─────────────────────────────
+       RESPONSIVE
+    ───────────────────────────── */
+    @media (max-width: 960px) {
+      .hero-content {
+        flex-direction: column;
+        padding: 44px 20px 52px;
+        gap: 32px;
+      }
+      .hero-form-wrap { width: 100%; max-width: 480px; }
+      .hero-buttons { max-width: 100%; flex-direction: row; }
+      .btn-wa, .btn-call { flex: 1; }
+      .why-grid  { grid-template-columns: 1fr 1fr; }
+      .srv-grid  { grid-template-columns: 1fr 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .trust-sep { display: none; }
+      .trust-item { padding: 6px 10px; font-size: 13px; }
+    }
+
+    @media (max-width: 600px) {
+      .top-cta .wa-btn { display: none; }
+      .hero-buttons { flex-direction: column; }
+      .why-grid { grid-template-columns: 1fr; }
+      .srv-grid  { grid-template-columns: 1fr; }
+      .cta-btns { flex-direction: column; align-items: center; }
+      .cta-btns a { width: 100%; max-width: 340px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="top-bar">
+    <div class="logo">הובלה <span>בקליק</span></div>
+    <div class="top-cta">
+      <a href="https://wa.me/972552736930?text=שלום%2C+אני+מעוניין+בהצעת+מחיר+להובלה"
+         class="wa-btn" target="_blank" rel="noopener">💬 וואטסאפ</a>
+      <a href="tel:0552736930" class="call-btn">📞 055-273-6930</a>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=1920&q=80"
+        alt="הובלה מקצועית"
+        loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+      <!-- RIGHT: headline + buttons + bullets -->
+      <div class="hero-text">
+
+        <div class="hero-badge">⭐ מבין חברות ההובלה המובילות בישראל</div>
+
+        <h1 class="hero-h1">
+          עוברים דירה?
+          <span class="line2">אנחנו הכתובת שלכם</span>
+        </h1>
+
+        <p class="hero-sub">הובלה + אריזה + סידור — הכל בחבילה אחת, מחיר סופי, אפס הפתעות.</p>
+
+        <div class="hero-buttons">
+          <a href="https://wa.me/972552736930?text=שלום%2C+אני+מעוניין+בהצעת+מחיר+להובלה"
+             class="btn-wa" target="_blank" rel="noopener">
+            💬 שלחו הודעה בוואטסאפ
+          </a>
+          <a href="tel:0552736930" class="btn-call">
+            📞 התקשרו עכשיו
+          </a>
+        </div>
+
+        <!-- Bullet trust signals -->
+        <div class="hero-bullets">
+          <div class="hero-bullet">
+            <span class="chk">✓</span>
+            <span>הובלה + אריזה + סידור מלא – הכל בחבילה אחת</span>
+          </div>
+          <div class="hero-bullet">
+            <span class="chk">✓</span>
+            <span>מחיר סופי מראש, אפס הפתעות ביום המעבר</span>
+          </div>
+          <div class="hero-bullet">
+            <span class="chk">✓</span>
+            <span>זמינים גם מחר בבוקר – ממש מהיום למחר</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- LEFT: lead form -->
+      <div class="hero-form-wrap">
+        <div class="hero-form">
+
+          <h2 class="form-title">קבלו הצעת מחיר תוך 10 דקות</h2>
+
+          <div class="form-speed-badge-wrap">
+            <div class="form-speed-badge">⚡ מענה תוך 10 דקות</div>
+          </div>
+
+          <div class="form-field">
+            <input type="text" name="name" placeholder="שם מלא" autocomplete="name">
+          </div>
+
+          <div class="form-field">
+            <input type="tel" name="phone" placeholder="מספר טלפון" autocomplete="tel">
+          </div>
+
+          <div class="form-field">
+            <select name="size">
+              <option value="" disabled selected>גודל הדירה</option>
+              <option value="1">1 חדר</option>
+              <option value="2">2 חדרים</option>
+              <option value="3">3 חדרים</option>
+              <option value="4">4 חדרים</option>
+              <option value="5+">5+ חדרים</option>
+            </select>
+          </div>
+
+          <div class="form-submit">
+            <button class="btn-submit" type="button" onclick="submitForm()">
+              שלחו לי הצעת מחיר ←
+            </button>
+          </div>
+
+          <p class="form-note">🔒 הפרטים מאובטחים. ללא ספאם.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TRUST BAR ── -->
+  <div class="trust-bar">
+    <div class="trust-items">
+      <div class="trust-item">😊 <span><strong>500</strong> לקוחות מרוצים</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">🏆 <span><strong>10</strong> שנות ניסיון</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">🗺️ <span>כיסוי ארצי</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">⚡ <span>זמינות מיידית</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">💰 <span>מחיר שקוף</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">🛡️ <span>אחריות מלאה</span></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">⭐ <span>דירוג 5 כוכבים</span></div>
+    </div>
+  </div>
+
+  <!-- ── WHY US ── -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-tag">למה לבחור בנו?</span>
+      <h2 class="section-h2">אנחנו לא רק מובילים — אנחנו שותפים מלאים לתהליך</h2>
+      <p class="section-desc">מגיעים מוכנים, אורזים מקצועית, עובדים בקצב שלכם, ומסדרים את הבית החדש עד שהכל בדיוק כמו שרציתם.</p>
+
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <span class="why-icon">📦</span>
+          <div class="why-h3">אריזה מקצועית</div>
+          <p class="why-p">חומרים איכותיים, כל חפץ ממוספר ומוגן. אפס שבירות, אפס אובדן.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">🚚</span>
+          <div class="why-h3">הובלה בטוחה</div>
+          <p class="why-p">משאיות מאובזרות, קשירה מקצועית, ביטוח מלא. הרהיטים שלכם בידיים טובות.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">💬</span>
+          <div class="why-h3">מחיר סופי מראש</div>
+          <p class="why-p">הצעת מחיר כוללת הכל. ביום ההובלה — אפס הפתעות, בדיוק המחיר שסוכם.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">🏠</span>
+          <div class="why-h3">סידור בבית החדש</div>
+          <p class="why-p">לא עוזבים עד שהכל מסודר: ארונות, מיטות, מטבח. הכל כמו שביקשתם.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">⚡</span>
+          <div class="why-h3">זמינות מהיום למחר</div>
+          <p class="why-p">הובלה דחופה? מארגנים תוך 24 שעות. גם בסופי שבוע.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-icon">🛡️</span>
+          <div class="why-h3">אחריות מלאה</div>
+          <p class="why-p">על כל פריט. אם משהו נפגע — אנחנו מתחייבים לפצות. בלי ויכוחים.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <span class="section-tag">מה כלול?</span>
+      <h2 class="section-h2">הכל בחבילה אחת, ללא תוספות מפתיעות</h2>
+
+      <div class="srv-grid reveal">
+        <div class="srv-card">
+          <div class="srv-icon">📦</div>
+          <div>
+            <div class="srv-h3">אריזה מקצועית</div>
+            <p class="srv-p">חומרי אריזה איכותיים, עטיפה מלאה לכל פריט.</p>
+          </div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">🚛</div>
+          <div>
+            <div class="srv-h3">הובלה בטוחה</div>
+            <p class="srv-p">משאיות מאובזרות, נהגים מנוסים, ביטוח מלא.</p>
+          </div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">🔧</div>
+          <div>
+            <div class="srv-h3">פירוק והרכבת רהיטים</div>
+            <p class="srv-p">מפרקים בזהירות ומרכיבים מחדש — כולל ארונות מורכבים.</p>
+          </div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">🏡</div>
+          <div>
+            <div class="srv-h3">סידור הבית החדש</div>
+            <p class="srv-p">מסדרים לפי הוראותיכם. לא עוזבים עד שהכל במקום.</p>
+          </div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">🗑️</div>
+          <div>
+            <div class="srv-h3">פינוי פסולת</div>
+            <p class="srv-p">לוקחים מה שלא צריך: קרטונים, ריהוט ישן, גרוטאות.</p>
+          </div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-icon">🌍</div>
+          <div>
+            <div class="srv-h3">כיסוי ארצי</div>
+            <p class="srv-p">מהצפון ועד אילת — ללא תוספת תשלום על מרחק.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ── -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-tag">לקוחות מספרים</span>
+      <h2 class="section-h2">500 משפחות שעברו איתנו — ממליצות בחום</h2>
+
+      <div class="test-grid reveal">
+
+        <div class="test-card">
+          <div class="quote-icon">"</div>
+          <div class="stars">★★★★★</div>
+          <p class="test-text">אחרי 8 שנים בדירה לא ידענו מאיפה להתחיל. הם הגיעו, ארזו, העבירו, וסידרו הכל ביום אחד. בסוף היום ישבנו בסלון המסודר עם כוס תה.</p>
+          <div class="test-author">
+            <div class="avatar">ר</div>
+            <div>
+              <div class="author-name">רונית א.</div>
+              <div class="author-loc">תל אביב</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="quote-icon">"</div>
+          <div class="stars">★★★★★</div>
+          <p class="test-text">קבעתי יום לפני, הגיעו ביום המחרת. המחיר שאמרו בטלפון — אותו מחיר שילמתי. אין הפתעות, אין תוספות. בדיוק מה שחיפשתי.</p>
+          <div class="test-author">
+            <div class="avatar">ע</div>
+            <div>
+              <div class="author-name">עמיר כ.</div>
+              <div class="author-loc">רמת גן</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="quote-icon">"</div>
+          <div class="stars">★★★★★</div>
+          <p class="test-text">ניסיתי 3 חברות לפני. מחלקה אחרת לגמרי. הגיעו בזמן, דיברו בכבוד, עבדו מהר — ולא נפגע כלום. ממליצה בחום.</p>
+          <div class="test-author">
+            <div class="avatar">ש</div>
+            <div>
+              <div class="author-name">שירה מ.</div>
+              <div class="author-loc">חיפה</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card">
+          <div class="quote-icon">"</div>
+          <div class="stars">★★★★★</div>
+          <p class="test-text">הובלה של 5 חדרים מרחובות לתל אביב. 7 שעות, 4 איש, הכל מסודר. מחיר הוגן ושקוף מהרגע הראשון. בפעם הבאה — רק הם.</p>
+          <div class="test-author">
+            <div class="avatar">ד</div>
+            <div>
+              <div class="author-name">דוד נ.</div>
+              <div class="author-loc">רחובות</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="section section-alt">
+    <div class="wrap">
+      <span class="section-tag">שאלות נפוצות</span>
+      <h2 class="section-h2">תשובות לכל מה שתהיתם</h2>
+
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>כמה זמן לוקחת הובלה ממוצעת?</span>
+            <span class="faq-plus">+</span>
+          </div>
+          <div class="faq-a">עבור דירת 3 חדרים ההובלה נמשכת 4–7 שעות, כולל אריזה וסידור. תלוי בכמות הרהיטים, קומות המבנה ומרחק הנסיעה. הצעת המחיר תכלול זמן משוער מדויק.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>האם מגיעים לכל הארץ?</span>
+            <span class="faq-plus">+</span>
+          </div>
+          <div class="faq-a">כן, אנחנו מבצעים הובלות בכל רחבי ישראל — מהצפון ועד אילת — ללא תוספת תשלום על מרחק. מחיר אחד כולל הכל.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>האם המחיר כולל הכל?</span>
+            <span class="faq-plus">+</span>
+          </div>
+          <div class="faq-a">בהחלט. ההצעה כוללת הגעה, אריזה, פירוק, הובלה, הרכבה וסידור. אין הפתעות ביום ההובלה — אתם יודעים מראש בדיוק מה תשלמו.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>איך מקבלים הצעת מחיר?</span>
+            <span class="faq-plus">+</span>
+          </div>
+          <div class="faq-a">מלאו את הטופס, שלחו וואטסאפ, או התקשרו. אנחנו חוזרים תוך 10 דקות עם הצעה מפורטת. ב-90% מהמקרים ניתן לקבל הצעה מיידית בטלפון.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA STRIP ── -->
+  <section class="cta-strip">
+    <h2>מוכנים לעבור? נתחיל עכשיו</h2>
+    <p>הצוות שלנו זמין 7 ימים בשבוע. מהיום למחר — זה אנחנו.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/972552736930?text=שלום%2C+אני+מעוניין+בהצעת+מחיר+להובלה"
+         class="btn-wa" target="_blank" rel="noopener" style="min-width:220px">
+        💬 שלחו הודעה בוואטסאפ
+      </a>
+      <a href="tel:0552736930"
+         style="min-width:220px; display:flex; align-items:center; justify-content:center; gap:10px;
+                background:rgba(255,255,255,0.12); color:#fff; text-decoration:none;
+                padding:16px 24px; border-radius:12px; font-size:17px; font-weight:700;
+                border:2px solid rgba(255,255,255,0.35); transition:all 0.2s;">
+        📞 055-273-6930
+      </a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>© 2024 הובלה בקליק — כל הזכויות שמורות &nbsp;|&nbsp; <a href="#">פרטיות</a> &nbsp;|&nbsp; <a href="#">תנאי שימוש</a></p>
+  </footer>
+
+  <!-- ── SCRIPTS ── -->
+  <script>
+    /* FAQ toggle */
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* Lead form → WhatsApp */
+    function submitForm() {
+      const name  = document.querySelector('input[name="name"]').value.trim();
+      const phone = document.querySelector('input[name="phone"]').value.trim();
+      const size  = document.querySelector('select[name="size"]').value;
+
+      if (!name || !phone) {
+        alert('נא למלא שם ומספר טלפון');
+        return;
+      }
+
+      const msg = `שלום! קיבלתי פנייה חדשה מהאתר:\nשם: ${name}\nטלפון: ${phone}${size ? '\nגודל דירה: ' + size : ''}`;
+      window.open(`https://wa.me/972552736930?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    /* Scroll-reveal */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
