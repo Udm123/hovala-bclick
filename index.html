@@ -7,6 +7,14 @@
   <meta name="description" content="הובלות מקצועיות + אריזה + סידור מלא. קבלו הצעת מחיר תוך 10 דקות. 500 לקוחות מרוצים. זמינים גם מחר בבוקר.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Google Ads Pixel -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18181285321"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18181285321');
+  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1103,6 +1111,7 @@
         btn.disabled = false;
       }, 3000);
 
+      gtag('event', 'conversion', {'send_to': 'AW-18181285321/Rk9_CNali7McEMnLwd1D'});
       const msg = `שלום! קיבלתי פנייה חדשה מהאתר:\nשם: ${name}\nטלפון: ${phone}${size ? '\nגודל דירה: ' + size : ''}`;
       window.open(`https://wa.me/972552736930?text=${encodeURIComponent(msg)}`, '_blank');
     }
