@@ -1069,8 +1069,18 @@
       if (!isOpen) item.classList.add('open');
     }
 
-    /* Lead form → WhatsApp */
-    function submitForm() {
+    /* ── Google Sheets Webhook ── */
+    const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbx5AqlRFpmd3cP73VRY2JzpolZtNjQzWmX45JYZOnvVu57F_SrXLCQjeHvDFlSk-dS2/exec';
+
+    async function sendToSheet(name, phone, size, source) {
+      try {
+        const params = new URLSearchParams({ name, phone, size, source });
+        await fetch(WEBHOOK_URL + '?' + params);
+      } catch(e) {}
+    }
+
+    /* Lead form → Sheet first, then WhatsApp */
+    async function submitForm() {
       const name  = document.querySelector('input[name="name"]').value.trim();
       const phone = document.querySelector('input[name="phone"]').value.trim();
       const size  = document.querySelector('select[name="size"]').value;
@@ -1079,6 +1089,19 @@
         alert('נא למלא שם ומספר טלפון');
         return;
       }
+
+      const btn = document.querySelector('.btn-submit');
+      const orig = btn.textContent;
+      btn.textContent = '⏳ שומר פרטים...';
+      btn.disabled = true;
+
+      await sendToSheet(name, phone, size, 'דף הבית (/)');
+
+      btn.textContent = '✅ נשמר! מעביר לוואטסאפ...';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.disabled = false;
+      }, 3000);
 
       const msg = `שלום! קיבלתי פנייה חדשה מהאתר:\nשם: ${name}\nטלפון: ${phone}${size ? '\nגודל דירה: ' + size : ''}`;
       window.open(`https://wa.me/972552736930?text=${encodeURIComponent(msg)}`, '_blank');
