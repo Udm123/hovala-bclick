@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הובלה בקליק – הובלות מקצועיות בישראל</title>
+  <meta name="description" content="השותפים שלך במעבר דירה. הובלה מקצועית, אריזה וסידור מלא – לא עוזבים אותך עד שתהיה מרוצה.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #00c8ff;
+      --cyan:       #00f5c4;
+      --navy:       #0a0e1a;
+      --navy2:      #0d1628;
+      --navy3:      #111d35;
+      --glass-bg:   rgba(255,255,255,0.05);
+      --glass-border: rgba(0,200,255,0.18);
+      --glass-hover: rgba(0,200,255,0.08);
+      --white:      #ffffff;
+      --gray:       #94a3b8;
+      --green-wa:   #25D366;
+      --radius:     16px;
+      --radius-lg:  24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      direction: rtl;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════════════════
+       AURORA BACKGROUND
+    ══════════════════════════════════════════ */
+    .aurora-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .aurora-bg::before,
+    .aurora-bg::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+      animation: auroraFloat 14s ease-in-out infinite alternate;
+    }
+    .aurora-bg::before {
+      width: 70vw; height: 70vw;
+      background: radial-gradient(circle, #1a237e 0%, #0d47a1 50%, transparent 70%);
+      top: -20%; right: -20%;
+      animation-duration: 18s;
+    }
+    .aurora-bg::after {
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, #006064 0%, #00796b 50%, transparent 70%);
+      bottom: -20%; left: -20%;
+      animation-duration: 22s;
+      animation-delay: -8s;
+    }
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.22;
+      animation: auroraFloat 20s ease-in-out infinite alternate;
+    }
+    .aurora-blob:nth-child(1) {
+      width: 40vw; height: 40vw;
+      background: radial-gradient(circle, #01579b, transparent 70%);
+      top: 40%; left: 30%;
+      animation-duration: 16s;
+      animation-delay: -5s;
+    }
+    .aurora-blob:nth-child(2) {
+      width: 30vw; height: 30vw;
+      background: radial-gradient(circle, #00bcd4, transparent 70%);
+      top: 20%; left: 60%;
+      animation-duration: 25s;
+      animation-delay: -12s;
+    }
+    @keyframes auroraFloat {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(4%, 3%) scale(1.05); }
+      66%  { transform: translate(-3%, 5%) scale(0.97); }
+      100% { transform: translate(2%, -4%) scale(1.03); }
+    }
+
+    /* GRID OVERLAY */
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ══════════════════════════════════════════
+       STICKY HEADER
+    ══════════════════════════════════════════ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,14,26,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,200,255,0.1);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo-text {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .logo-text span { color: var(--blue); }
+    .header-actions { display: flex; gap: 12px; align-items: center; }
+    .btn-wa-sm {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--green-wa);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-wa-sm:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+    .phone-link {
+      color: var(--gray);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      direction: ltr;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+    .phone-link:hover { color: var(--blue); }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 32px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,200,255,0.1);
+      border: 1px solid rgba(0,200,255,0.25);
+      border-radius: 40px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+    .hero-badge::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent { color: var(--blue); }
+    .hero-para {
+      font-size: 1.1rem;
+      color: #c8d6e5;
+      line-height: 1.8;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #00c8ff, #0083cc);
+      color: #fff;
+      padding: 15px 32px;
+      border-radius: 40px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,200,255,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,200,255,0.45); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,200,255,0.06); }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 16px 12px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,200,255,0.12); }
+    .stat-num { font-size: 1.6rem; font-weight: 900; color: var(--blue); display: block; line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+
+    /* TRUCK ILLUSTRATION */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .truck-wrap {
+      position: relative;
+      animation: truckFloat 5s ease-in-out infinite;
+    }
+    @keyframes truckFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-14px); }
+    }
+    .truck-glow {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 40px;
+      background: radial-gradient(ellipse, rgba(0,200,255,0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+      50%      { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
+    }
+
+    /* ══════════════════════════════════════════
+       SECTIONS WRAPPER
+    ══════════════════════════════════════════ */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 80px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      display: inline-block;
+      background: rgba(0,200,255,0.1);
+      border: 1px solid rgba(0,200,255,0.2);
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 40px;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--gray);
+      max-width: 540px;
+      margin-bottom: 48px;
+    }
+
+    /* ══════════════════════════════════════════
+       CALCULATOR
+    ══════════════════════════════════════════ */
+    .calc-wrap {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,200,255,0.2);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .calc-field { display: flex; flex-direction: column; gap: 10px; }
+    .calc-field.full { grid-column: 1 / -1; }
+    .calc-label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #c8d6e5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .calc-label .lbl-icon { font-size: 1rem; }
+
+    /* Segment buttons */
+    .seg-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .seg-btn {
+      flex: 1; min-width: 52px;
+      background: rgba(255,255,255,0.05);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      color: var(--gray);
+      padding: 10px 8px;
+      border-radius: 10px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: center;
+    }
+    .seg-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,200,255,0.06); }
+    .seg-btn.active {
+      background: linear-gradient(135deg, #00c8ff22, #0083cc22);
+      border-color: var(--blue);
+      color: var(--blue);
+      box-shadow: 0 0 12px rgba(0,200,255,0.18);
+    }
+
+    /* Toggle */
+    .toggle-group { display: flex; gap: 0; border-radius: 10px; overflow: hidden; border: 1.5px solid rgba(255,255,255,0.12); }
+    .toggle-btn {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: none;
+      color: var(--gray);
+      padding: 10px 16px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .toggle-btn:not(:last-child) { border-left: 1.5px solid rgba(255,255,255,0.1); }
+    .toggle-btn.active { background: rgba(0,200,255,0.12); color: var(--blue); }
+
+    /* Floor input */
+    .floor-group { display: flex; align-items: center; gap: 12px; }
+    .floor-input {
+      width: 80px;
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      color: #fff;
+      padding: 10px 14px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .floor-input:focus { border-color: var(--blue); }
+    .floor-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.18s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .floor-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* Extras */
+    .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .extra-item {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.18s;
+      user-select: none;
+    }
+    .extra-item:hover { border-color: rgba(0,200,255,0.3); }
+    .extra-item.checked { border-color: var(--blue); background: rgba(0,200,255,0.07); }
+    .extra-cb {
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+    .extra-item.checked .extra-cb {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+    .extra-cb::after { content: ''; }
+    .extra-item.checked .extra-cb::after { content: '✓'; color: #0a0e1a; font-weight: 900; font-size: 0.8rem; }
+    .extra-name { font-size: 0.9rem; font-weight: 600; flex: 1; }
+    .extra-price { font-size: 0.8rem; color: var(--cyan); font-weight: 700; }
+    .extra-price.free { color: #a0aec0; }
+
+    /* Price display */
+    .price-result {
+      margin-top: 32px;
+      background: linear-gradient(135deg, rgba(0,200,255,0.08), rgba(0,131,204,0.08));
+      border: 1.5px solid rgba(0,200,255,0.3);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .price-label { font-size: 1rem; color: var(--gray); font-weight: 600; }
+    .price-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blue);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .price-range { font-size: 0.85rem; color: var(--gray); margin-top: 4px; }
+    .btn-calc-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--green-wa);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+      white-space: nowrap;
+    }
+    .btn-calc-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.4); }
+
+    /* ══════════════════════════════════════════
+       SERVICES
+    ══════════════════════════════════════════ */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      backdrop-filter: blur(12px);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,200,255,0.12);
+      border-color: rgba(0,200,255,0.35);
+    }
+    .service-icon {
+      font-size: 2.4rem;
+      margin-bottom: 14px;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(0,200,255,0.4));
+    }
+    .service-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .service-desc { font-size: 0.9rem; color: var(--gray); line-height: 1.65; }
+
+    /* ══════════════════════════════════════════
+       TESTIMONIALS
+    ══════════════════════════════════════════ */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .review-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .review-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,200,255,0.1); }
+    .review-stars { color: #fbbf24; font-size: 1rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .review-text { font-size: 0.97rem; color: #c8d6e5; line-height: 1.75; margin-bottom: 18px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), #0055aa);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem; color: #fff; flex-shrink: 0;
+    }
+    .review-name { font-weight: 700; font-size: 0.95rem; }
+    .review-city { font-size: 0.82rem; color: var(--gray); }
+
+    /* ══════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--glass-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: rgba(0,200,255,0.3); }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-arrow {
+      font-size: 1.2rem;
+      color: var(--blue);
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.75;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+    /* ══════════════════════════════════════════
+       LEAD FORM
+    ══════════════════════════════════════════ */
+    .form-section {
+      background: rgba(255,255,255,0.03);
+      border-top: 1px solid rgba(0,200,255,0.1);
+      border-bottom: 1px solid rgba(0,200,255,0.1);
+    }
+    .form-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; text-align: right; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-label { font-size: 0.85rem; font-weight: 600; color: var(--gray); }
+    .form-input {
+      background: rgba(255,255,255,0.06);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      color: #fff;
+      padding: 12px 16px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input::placeholder { color: #4a5568; }
+    .form-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,200,255,0.1); }
+    select.form-input { cursor: pointer; }
+    option { background: #0d1628; color: #fff; }
+    .form-submit {
+      width: 100%;
+      margin-top: 16px;
+      padding: 16px;
+      background: linear-gradient(135deg, #00c8ff, #0083cc);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(0,200,255,0.3);
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,200,255,0.45); }
+    .form-secure { font-size: 0.82rem; color: var(--gray); margin-top: 12px; }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: rgba(0,0,0,0.4);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; }
+    .footer-logo span { color: var(--blue); }
+    .footer-phone { font-size: 1.3rem; font-weight: 800; color: var(--blue); direction: ltr; display: inline-block; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .footer-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-wa); color: #fff;
+      padding: 10px 24px; border-radius: 40px;
+      font-weight: 700; text-decoration: none; font-size: 0.95rem;
+      margin-bottom: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .footer-wa:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
+    .footer-copy { font-size: 0.8rem; color: #4a5568; }
+
+    /* ══════════════════════════════════════════
+       FLOOR CONDITIONAL
+    ══════════════════════════════════════════ */
+    .floor-row { display: none; }
+    .floor-row.visible { display: flex; flex-direction: column; gap: 10px; }
+
+    /* ══════════════════════════════════════════
+       SCROLL ANIMATIONS
+    ══════════════════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up:nth-child(2) { transition-delay: 0.08s; }
+    .fade-up:nth-child(3) { transition-delay: 0.16s; }
+    .fade-up:nth-child(4) { transition-delay: 0.24s; }
+    .fade-up:nth-child(5) { transition-delay: 0.32s; }
+    .fade-up:nth-child(6) { transition-delay: 0.40s; }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; }
+      .truck-svg { max-width: 340px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr; }
+      .extras-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      header { padding: 12px 16px; }
+      section { padding: 60px 16px; }
+      .hero { padding: 60px 16px 40px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .calc-wrap { padding: 24px 18px; }
+      .price-result { flex-direction: column; text-align: center; }
+      .form-grid { grid-template-columns: 1fr; }
+      .phone-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Aurora Background -->
+<div class="aurora-bg">
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+</div>
+<div class="grid-overlay"></div>
+
+<!-- ════════════ HEADER ════════════ -->
+<header>
+  <div class="logo-text">הובלה<span>בקליק</span></div>
+  <div class="header-actions">
+    <a href="tel:0552736930" class="phone-link">055-273-6930</a>
+    <a href="https://wa.me/9720552736930" target="_blank" class="btn-wa-sm">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- ════════════ HERO ════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <!-- Text -->
+    <div>
+      <div class="hero-badge">⚡ זמינים גם מחר בבוקר</div>
+      <h1>עוברים דירה?<br><span class="accent">אנחנו השותפים שלכם</span></h1>
+      <p class="hero-para">
+        לא עוד חברת הובלות סתם — אנחנו השותפים האמיתיים שלך במעבר דירה.
+        דואגים להכל: הובלה, אריזה מקצועית וסידור בבית החדש.
+        לא עוזבים אותך עד שתהיה מרוצה לגמרי.
+      </p>
+      <div class="hero-ctas">
+        <a href="#lead-form" class="btn-primary">
+          📋 קבל הצעת מחיר חינם
+        </a>
+        <a href="https://wa.me/9720552736930" target="_blank" class="btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          שלח הודעה
+        </a>
+      </div>
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <span class="stat-num" data-target="500">0</span>
+          <div class="stat-label">לקוחות מרוצים</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-target="10">0</span>
+          <div class="stat-label">שנות ניסיון</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">★★★★★</span>
+          <div class="stat-label">דירוג ממוצע</div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">🗺️</span>
+          <div class="stat-label">כיסוי ארצי</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Truck Visual -->
+    <div class="hero-visual">
+      <div class="truck-wrap">
+        <svg class="truck-svg" viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;filter:drop-shadow(0 0 40px rgba(0,200,255,0.2))">
+          <!-- Truck body -->
+          <rect x="10" y="80" width="340" height="170" rx="12" fill="#0d1e3d" stroke="#00c8ff" stroke-width="1.5"/>
+          <!-- Cargo area -->
+          <rect x="14" y="84" width="332" height="162" rx="10" fill="#091629"/>
+          <!-- Logo on truck side -->
+          <rect x="60" y="120" width="240" height="90" rx="8" fill="rgba(0,200,255,0.06)" stroke="rgba(0,200,255,0.2)" stroke-width="1"/>
+          <!-- Logo text in truck -->
+          <text x="180" y="155" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="900" font-size="26" fill="#00c8ff" letter-spacing="-0.5">הובלה</text>
+          <text x="180" y="184" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="900" font-size="22" fill="#ffffff" letter-spacing="1">בקליק</text>
+          <!-- Decorative lines on cargo -->
+          <line x1="14" y1="126" x2="346" y2="126" stroke="rgba(0,200,255,0.1)" stroke-width="1"/>
+          <line x1="14" y1="218" x2="346" y2="218" stroke="rgba(0,200,255,0.1)" stroke-width="1"/>
+          <!-- Cab -->
+          <path d="M350 130 L350 250 L500 250 L500 160 L430 130 Z" fill="#0d1e3d" stroke="#00c8ff" stroke-width="1.5"/>
+          <!-- Cab roof curve -->
+          <path d="M350 130 Q390 90 430 130" fill="#091629" stroke="#00c8ff" stroke-width="1.5"/>
+          <!-- Windshield -->
+          <path d="M360 138 Q390 105 428 138 L428 185 L360 185 Z" fill="rgba(0,200,255,0.08)" stroke="rgba(0,200,255,0.35)" stroke-width="1.2"/>
+          <!-- Windshield reflection -->
+          <path d="M368 145 Q385 120 412 140" stroke="rgba(255,255,255,0.25)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- Side window -->
+          <rect x="436" y="150" width="50" height="50" rx="6" fill="rgba(0,200,255,0.07)" stroke="rgba(0,200,255,0.3)" stroke-width="1"/>
+          <!-- Door handle -->
+          <line x1="444" y1="176" x2="458" y2="176" stroke="rgba(0,200,255,0.5)" stroke-width="2" stroke-linecap="round"/>
+          <!-- Front grill -->
+          <rect x="494" y="180" width="18" height="50" rx="4" fill="#091629" stroke="#00c8ff" stroke-width="1.2"/>
+          <line x1="494" y1="194" x2="512" y2="194" stroke="rgba(0,200,255,0.4)" stroke-width="1"/>
+          <line x1="494" y1="204" x2="512" y2="204" stroke="rgba(0,200,255,0.4)" stroke-width="1"/>
+          <line x1="494" y1="214" x2="512" y2="214" stroke="rgba(0,200,255,0.4)" stroke-width="1"/>
+          <!-- Headlight -->
+          <ellipse cx="508" cy="172" rx="8" ry="6" fill="rgba(0,200,255,0.15)" stroke="#00c8ff" stroke-width="1.2"/>
+          <ellipse cx="508" cy="172" rx="4" ry="3" fill="rgba(0,200,255,0.4)"/>
+          <!-- Wheels -->
+          <circle cx="90" cy="255" r="38" fill="#060e1c" stroke="#00c8ff" stroke-width="2"/>
+          <circle cx="90" cy="255" r="24" fill="#0d1e3d" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+          <circle cx="90" cy="255" r="8" fill="rgba(0,200,255,0.3)"/>
+          <!-- Wheel spokes -->
+          <line x1="90" y1="231" x2="90" y2="217" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="90" y1="279" x2="90" y2="293" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="66" y1="255" x2="52" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="114" y1="255" x2="128" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="73" y1="238" x2="63" y2="228" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="107" y1="272" x2="117" y2="282" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="73" y1="272" x2="63" y2="282" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="107" y1="238" x2="117" y2="228" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+
+          <circle cx="270" cy="255" r="38" fill="#060e1c" stroke="#00c8ff" stroke-width="2"/>
+          <circle cx="270" cy="255" r="24" fill="#0d1e3d" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+          <circle cx="270" cy="255" r="8" fill="rgba(0,200,255,0.3)"/>
+          <line x1="270" y1="231" x2="270" y2="217" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="270" y1="279" x2="270" y2="293" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="246" y1="255" x2="232" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="294" y1="255" x2="308" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="253" y1="238" x2="243" y2="228" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="287" y1="272" x2="297" y2="282" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+
+          <circle cx="440" cy="255" r="38" fill="#060e1c" stroke="#00c8ff" stroke-width="2"/>
+          <circle cx="440" cy="255" r="24" fill="#0d1e3d" stroke="rgba(0,200,255,0.4)" stroke-width="1.5"/>
+          <circle cx="440" cy="255" r="8" fill="rgba(0,200,255,0.3)"/>
+          <line x1="440" y1="231" x2="440" y2="217" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="440" y1="279" x2="440" y2="293" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="416" y1="255" x2="402" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="464" y1="255" x2="478" y2="255" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="423" y1="238" x2="413" y2="228" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="457" y1="272" x2="467" y2="282" stroke="rgba(0,200,255,0.35)" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- Ground shadow bar -->
+          <rect x="30" y="290" width="480" height="6" rx="3" fill="rgba(0,200,255,0.06)"/>
+          <!-- Exhaust smoke particles -->
+          <circle cx="30" cy="100" r="6" fill="rgba(0,200,255,0.12)" opacity="0.8">
+            <animateTransform attributeName="transform" type="translate" values="0,0;-8,-20;-14,-40" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;0.3;0" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="r" values="5;9;13" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="20" cy="110" r="4" fill="rgba(0,200,255,0.1)" opacity="0.6">
+            <animateTransform attributeName="transform" type="translate" values="0,0;-6,-18;-12,-36" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.5;0.2;0" dur="3s" begin="0.8s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <div class="truck-glow"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CALCULATOR ════════════ -->
+<section id="calculator">
+  <div class="section-tag">🧮 מחשבון הובלה</div>
+  <h2 class="section-title">הערכת מחיר מיידית</h2>
+  <p class="section-sub">מלאו את הפרטים וקבלו הערכה משוערת תוך שניות</p>
+
+  <div class="calc-wrap">
+    <div class="calc-grid">
+
+      <!-- Rooms -->
+      <div class="calc-field full">
+        <div class="calc-label"><span class="lbl-icon">🏠</span> מספר חדרים</div>
+        <div class="seg-group" id="rooms-group">
+          <button class="seg-btn" data-val="1" onclick="selectRoom(this,1)">1</button>
+          <button class="seg-btn" data-val="2" onclick="selectRoom(this,2)">2</button>
+          <button class="seg-btn active" data-val="3" onclick="selectRoom(this,3)">3</button>
+          <button class="seg-btn" data-val="4" onclick="selectRoom(this,4)">4</button>
+          <button class="seg-btn" data-val="5" onclick="selectRoom(this,5)">5+</button>
+        </div>
+      </div>
+
+      <!-- Elevator from -->
+      <div class="calc-field">
+        <div class="calc-label"><span class="lbl-icon">🔼</span> מעלית בדירה הנוכחית</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="elev-from-yes" onclick="setElevator('from','yes')">יש מעלית</button>
+          <button class="toggle-btn" id="elev-from-no" onclick="setElevator('from','no')">אין מעלית</button>
+        </div>
+      </div>
+
+      <!-- Elevator to -->
+      <div class="calc-field">
+        <div class="calc-label"><span class="lbl-icon">🔼</span> מעלית בדירה החדשה</div>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="elev-to-yes" onclick="setElevator('to','yes')">יש מעלית</button>
+          <button class="toggle-btn" id="elev-to-no" onclick="setElevator('to','no')">אין מעלית</button>
+        </div>
+      </div>
+
+      <!-- Floor FROM (conditional) -->
+      <div class="calc-field floor-row" id="floor-from-row">
+        <div class="calc-label"><span class="lbl-icon">📶</span> קומה בדירה הנוכחית</div>
+        <div class="floor-group">
+          <button class="floor-btn" onclick="changeFloor('from',-1)">−</button>
+          <input class="floor-input" type="number" id="floor-from" value="1" min="1" max="20" oninput="calcPrice()">
+          <button class="floor-btn" onclick="changeFloor('from',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Floor TO (conditional) -->
+      <div class="calc-field floor-row" id="floor-to-row">
+        <div class="calc-label"><span class="lbl-icon">📶</span> קומה בדירה החדשה</div>
+        <div class="floor-group">
+          <button class="floor-btn" onclick="changeFloor('to',-1)">−</button>
+          <input class="floor-input" type="number" id="floor-to" value="1" min="1" max="20" oninput="calcPrice()">
+          <button class="floor-btn" onclick="changeFloor('to',1)">+</button>
+        </div>
+      </div>
+
+      <!-- Extras -->
+      <div class="calc-field full">
+        <div class="calc-label"><span class="lbl-icon">✨</span> שירותים נוספים</div>
+        <div class="extras-grid">
+          <div class="extra-item" onclick="toggleExtra(this,'packing',0)">
+            <div class="extra-cb"></div>
+            <span class="extra-name">📦 אריזה מקצועית</span>
+            <span class="extra-price free">כלול</span>
+          </div>
+          <div class="extra-item" onclick="toggleExtra(this,'furniture',250)">
+            <div class="extra-cb"></div>
+            <span class="extra-name">🪑 פירוק והרכבת רהיטים</span>
+            <span class="extra-price">+₪250</span>
+          </div>
+          <div class="extra-item" onclick="toggleExtra(this,'trash',200)">
+            <div class="extra-cb"></div>
+            <span class="extra-name">🗑️ פינוי פסולת</span>
+            <span class="extra-price">+₪200</span>
+          </div>
+          <div class="extra-item" onclick="toggleExtra(this,'insurance',0)">
+            <div class="extra-cb"></div>
+            <span class="extra-name">🛡️ ביטוח הובלה</span>
+            <span class="extra-price free">כלול</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Price Result -->
+    <div class="price-result">
+      <div>
+        <div class="price-label">הערכת מחיר משוערת</div>
+        <div class="price-num" id="price-display">₪1,800</div>
+        <div class="price-range" id="price-range">טווח: ₪1,530 – ₪2,070</div>
+      </div>
+      <a href="#" id="calc-wa-btn" class="btn-calc-cta" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        שלח לאישור תוך 10 דקות
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SERVICES ════════════ -->
+<section id="services">
+  <div class="section-tag">🚀 השירותים שלנו</div>
+  <h2 class="section-title">הכל תחת קורת גג אחת</h2>
+  <p class="section-sub">אנחנו מטפלים בכל פרט – כך שאתם יכולים להתפנות לדברים החשובים</p>
+
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <span class="service-icon">📦</span>
+      <div class="service-title">אריזה מקצועית</div>
+      <div class="service-desc">חומרי אריזה איכותיים, עטיפת פריטים שבירים ויקרים, סימון קופסאות — הכל מסודר לפי חדר.</div>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🚛</span>
+      <div class="service-title">הובלה בטוחה</div>
+      <div class="service-desc">משאיות מרופדות, כבישי ישראל לא מפחידים אותנו. כל חבילה מאובטחת ומגיעה שלמה.</div>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🪑</span>
+      <div class="service-title">פירוק והרכבת רהיטים</div>
+      <div class="service-desc">צוות מיומן שפורק ומרכיב כל סוג רהיט — מהיר, מדויק ובלי שריטה אחת.</div>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🏠</span>
+      <div class="service-title">סידור בבית החדש</div>
+      <div class="service-desc">לא מניחים ומסתלקים. מסדרים את הרהיטים בדיוק כפי שרציתם — עד שתהיו מרוצים.</div>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🗑️</span>
+      <div class="service-title">פינוי פסולת</div>
+      <div class="service-desc">נפטרים מכל מה שלא צריך — ריהוט ישן, קרטונים, פסולת בנייה. הדירה תהיה נקייה.</div>
+    </div>
+    <div class="service-card fade-up">
+      <span class="service-icon">🗺️</span>
+      <div class="service-title">כיסוי ארצי</div>
+      <div class="service-desc">מאילת ועד קריית שמונה — מגיעים לכל פינה בישראל ללא תוספת מחיר על מרחק.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section id="reviews">
+  <div class="section-tag">💬 לקוחות מספרים</div>
+  <h2 class="section-title">500 לקוחות מרוצים לא טועים</h2>
+  <p class="section-sub">תקראו מה אומרים עלינו אנשים שכבר עברו איתנו</p>
+
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"הפתעתי לטובה. הגיעו בזמן, היו מקצועיים להפליא ולא שברו כלום. הכינו הכל מראש ועזרו לי גם לסדר את הסלון. ממליצה בחום!"</p>
+      <div class="review-author">
+        <div class="review-avatar">ש</div>
+        <div>
+          <div class="review-name">שרה כהן</div>
+          <div class="review-city">תל אביב</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"עברתי 3 פעמים דירה בחיי ואף פעם לא היה קל כמו הפעם. הצוות של הובלה בקליק הם אנשי מקצוע אמיתיים. המחיר היה הוגן ולא היו הפתעות."</p>
+      <div class="review-author">
+        <div class="review-avatar">ד</div>
+        <div>
+          <div class="review-name">דוד לוי</div>
+          <div class="review-city">רמת גן</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"ארזו לי את כל הדירה תוך שעתיים. הגיעו עם כל החומרים, עטפו את הטלוויזיה, אפילו הזיזו את הארון הכבד מהמרפסת. שירות מעולה."</p>
+      <div class="review-author">
+        <div class="review-avatar">מ</div>
+        <div>
+          <div class="review-name">מיכל ברק</div>
+          <div class="review-city">חיפה</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"שלחתי הודעה בוואטסאפ בערב וקיבלתי הצעת מחיר תוך 10 דקות כמו שהבטיחו. הצוות היה נחמד ועובד כמו שעון. בהחלט אמליץ לכולם."</p>
+      <div class="review-author">
+        <div class="review-avatar">י</div>
+        <div>
+          <div class="review-name">יוסי אברהם</div>
+          <div class="review-city">רחובות</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FAQ ════════════ -->
+<section id="faq">
+  <div class="section-tag">❓ שאלות נפוצות</div>
+  <h2 class="section-title">כל מה שרציתם לדעת</h2>
+  <p class="section-sub">יש שאלה? כנראה שכבר ענינו עליה</p>
+
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        כמה זמן לוקחת הובלה רגילה?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">הובלה ממוצעת של 3-4 חדרים לוקחת בין 4 ל-8 שעות, תלוי בקומה, כמות הרהיטים והמרחק. אנחנו נותנים הערכת זמן מדויקת לפני הכל.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        האם אתם מגיעים לכל הארץ?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">כן! אנחנו מכסים את כל ישראל — מאילת בדרום ועד קריית שמונה בצפון, כולל פריפריה ויישובים קטנים. ללא תוספת מחיר על מרחק.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        מה כלול במחיר?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">המחיר כולל את צוות העובדים, המשאית, חומרי אריזה, אריזה מקצועית וביטוח הובלה. פירוק והרכבת רהיטים ופינוי פסולת הם שירותים נוספים בתשלום נפרד.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        כמה מראש צריך לתאם?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">אנחנו ממליצים לתאם לפחות 3-5 ימים מראש, אבל אנחנו מנסים להתאים גם בקצר מועד. פנו אלינו ונעשה כל מה שאפשר.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        האם ניתן לבטל או לשנות מועד?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">כמובן. ניתן לשנות או לבטל הזמנה עד 24 שעות לפני ההובלה ללא עלות. הבנה מלאה לשינויים — החיים קורים.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        האם יש ביטוח על החפצים?
+        <span class="faq-arrow">▾</span>
+      </div>
+      <div class="faq-a">כן, ביטוח הובלה בסיסי כלול ללא עלות נוספת. אנחנו עובדים בזהירות מרבית ובמקרה הנדיר של נזק — אנחנו אחראים.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ LEAD FORM ════════════ -->
+<section class="form-section" id="lead-form">
+  <div class="form-wrap">
+    <div class="section-tag">📋 הצעת מחיר</div>
+    <h2 class="section-title">קבלו הצעה תוך 10 דקות</h2>
+    <p class="section-sub" style="margin: 0 auto 0 auto;">השאירו פרטים ואנחנו חוזרים אליכם מהר מכפי שתצפו</p>
+
+    <form class="form-grid" onsubmit="submitForm(event)">
+      <div class="form-field">
+        <label class="form-label">שם מלא</label>
+        <input class="form-input" type="text" id="f-name" placeholder="ישראל ישראלי" required>
+      </div>
+      <div class="form-field">
+        <label class="form-label">טלפון</label>
+        <input class="form-input" type="tel" id="f-phone" placeholder="05X-XXX-XXXX" required>
+      </div>
+      <div class="form-field full">
+        <label class="form-label">גודל דירה</label>
+        <select class="form-input" id="f-size">
+          <option value="">בחר גודל דירה...</option>
+          <option value="1">דירת חדר 1</option>
+          <option value="2">דירת 2 חדרים</option>
+          <option value="3">דירת 3 חדרים</option>
+          <option value="4">דירת 4 חדרים</option>
+          <option value="5">דירת 5 חדרים ומעלה</option>
+        </select>
+      </div>
+      <div class="form-field full">
+        <button type="submit" class="form-submit">🚀 שלח ואחכה לחזרה</button>
+        <p class="form-secure">🔒 הפרטים מאובטחים לחלוטין. ללא ספאם, אנחנו שונאים את זה גם.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="footer-logo">הובלה<span>בקליק</span></div>
+  <br>
+  <a href="tel:0552736930" class="footer-phone">055-273-6930</a>
+  <br><br>
+  <a href="https://wa.me/9720552736930" target="_blank" class="footer-wa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    שלח הודעה בוואטסאפ
+  </a>
+  <br><br>
+  <p class="footer-copy">© 2025 הובלה בקליק — כל הזכויות שמורות</p>
+</footer>
+
+<!-- ════════════ JAVASCRIPT ════════════ -->
+<script>
+  /* ── Calculator State ── */
+  let state = {
+    rooms: 3,
+    elevFrom: true,
+    elevTo: true,
+    floorFrom: 1,
+    floorTo: 1,
+    extras: { packing: false, furniture: false, trash: false, insurance: false }
+  };
+
+  const basePrices = { 1:800, 2:1200, 3:1800, 4:2500, 5:3200 };
+  const extraPrices = { packing:0, furniture:250, trash:200, insurance:0 };
+
+  function selectRoom(btn, val) {
+    document.querySelectorAll('#rooms-group .seg-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.rooms = val;
+    calcPrice();
+  }
+
+  function setElevator(which, val) {
+    const yes = document.getElementById(`elev-${which}-yes`);
+    const no  = document.getElementById(`elev-${which}-no`);
+    const row = document.getElementById(`floor-${which}-row`);
+    if (val === 'yes') {
+      yes.classList.add('active'); no.classList.remove('active');
+      if (which === 'from') state.elevFrom = true; else state.elevTo = true;
+      row.classList.remove('visible');
+    } else {
+      no.classList.add('active'); yes.classList.remove('active');
+      if (which === 'from') state.elevFrom = false; else state.elevTo = false;
+      row.classList.add('visible');
+    }
+    calcPrice();
+  }
+
+  function changeFloor(which, delta) {
+    const input = document.getElementById(`floor-${which}`);
+    const newVal = Math.max(1, Math.min(20, parseInt(input.value||1) + delta));
+    input.value = newVal;
+    if (which === 'from') state.floorFrom = newVal; else state.floorTo = newVal;
+    calcPrice();
+  }
+
+  function toggleExtra(el, key, price) {
+    el.classList.toggle('checked');
+    state.extras[key] = el.classList.contains('checked');
+    calcPrice();
+  }
+
+  function calcPrice() {
+    let base = basePrices[state.rooms] || 3200;
+    if (!state.elevFrom) base += (parseInt(document.getElementById('floor-from').value)||1) * 150;
+    if (!state.elevTo)   base += (parseInt(document.getElementById('floor-to').value)||1) * 150;
+    Object.keys(state.extras).forEach(k => { if (state.extras[k]) base += extraPrices[k]; });
+
+    const lo = Math.round(base * 0.85);
+    const hi = Math.round(base * 1.15);
+    document.getElementById('price-display').textContent = '₪' + base.toLocaleString('he-IL');
+    document.getElementById('price-range').textContent = `טווח משוער: ₪${lo.toLocaleString('he-IL')} – ₪${hi.toLocaleString('he-IL')}`;
+
+    // Build WhatsApp message
+    const rooms = state.rooms === 5 ? '5+' : state.rooms;
+    const elevFrom = state.elevFrom ? 'יש' : `אין (קומה ${document.getElementById('floor-from').value})`;
+    const elevTo = state.elevTo ? 'יש' : `אין (קומה ${document.getElementById('floor-to').value})`;
+    const extras = Object.entries(state.extras).filter(([k,v])=>v).map(([k])=>k==='packing'?'אריזה':k==='furniture'?'פירוק/הרכבה':k==='trash'?'פינוי פסולת':'ביטוח').join(', ') || 'ללא תוספות';
+    const msg = `שלום, אני מעוניין בהצעת מחיר:\n🏠 חדרים: ${rooms}\n🔼 מעלית מוצא: ${elevFrom}\n🔼 מעלית יעד: ${elevTo}\n✨ תוספות: ${extras}\n💰 הערכה: ₪${base.toLocaleString('he-IL')}`;
+    document.getElementById('calc-wa-btn').href = 'https://wa.me/9720552736930?text=' + encodeURIComponent(msg);
+  }
+
+  /* ── FAQ ── */
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    item.classList.toggle('open');
+  }
+
+  /* ── Form Submit ── */
+  function submitForm(e) {
+    e.preventDefault();
+    const name  = document.getElementById('f-name').value;
+    const phone = document.getElementById('f-phone').value;
+    const size  = document.getElementById('f-size').value;
+    const msg = `שלום! שמי ${name}, טלפון ${phone}. מעוניין בהצעת מחיר עבור דירת ${size} חדרים.`;
+    window.open('https://wa.me/9720552736930?text=' + encodeURIComponent(msg), '_blank');
+  }
+
+  /* ── Animated Counters ── */
+  function animateCounters() {
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const interval = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + '+';
+        if (current >= target) clearInterval(interval);
+      }, 35);
+    });
+  }
+
+  /* ── Scroll Animations ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.querySelector('[data-target]')) animateCounters();
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up, .stats-row').forEach(el => observer.observe(el));
+
+  // Trigger counters on hero visible
+  const heroObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) { animateCounters(); heroObserver.disconnect(); }
+  }, { threshold: 0.3 });
+  const statsRow = document.querySelector('.stats-row');
+  if (statsRow) heroObserver.observe(statsRow);
+
+  // Init calc
+  calcPrice();
+</script>
+</body>
+</html>
