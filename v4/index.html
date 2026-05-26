@@ -168,12 +168,30 @@ a{text-decoration:none;color:inherit}
 /* FORM */
 .fcard{
   background:#fff;border:1.5px solid var(--bd);
-  border-radius:18px;padding:24px 22px 20px;
+  border-radius:18px;overflow:hidden;
   box-shadow:0 6px 28px rgba(0,0,0,.07);
   animation:slideRight .7s .3s ease both;
 }
-.fc-title{font-size:17px;font-weight:900;color:var(--nv);margin-bottom:3px}
-.fc-sub{font-size:12px;color:var(--gray);margin-bottom:18px}
+
+/* Calculator header */
+.calc-head{
+  background:linear-gradient(135deg,var(--nv),#1A2744);
+  padding:14px 20px 12px;
+  display:flex;align-items:center;gap:10px;
+}
+.calc-head-icon{font-size:24px;line-height:1}
+.calc-head-text .cht{font-size:16px;font-weight:900;color:#fff}
+.calc-head-text .chs{font-size:11px;color:rgba(255,255,255,.58);margin-top:1px}
+.live-badge{
+  margin-right:auto;display:flex;align-items:center;gap:5px;
+  background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3);
+  color:#4ADE80;font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px;
+  white-space:nowrap;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:ld 1.4s ease-in-out infinite;flex-shrink:0}
+@keyframes ld{0%,100%{opacity:1}50%{opacity:.25}}
+
+.fcard-body{padding:18px 20px 18px}
 
 .rl{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px}
 .rbts{display:flex;gap:5px;margin-bottom:14px}
@@ -196,7 +214,41 @@ a{text-decoration:none;color:inherit}
 }
 .fg select:focus{border-color:var(--or)}
 
-.in-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+/* Price box */
+.pbox{
+  background:linear-gradient(135deg,#0D1B2A,#162033);
+  border-radius:12px;padding:14px 16px 12px;margin-bottom:12px;
+  position:relative;overflow:hidden;
+}
+.pbox::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);
+  background-size:200% 100%;animation:psh 2.8s linear infinite;
+}
+@keyframes psh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.pb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.pb-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px}
+.pb-disc{background:rgba(255,87,34,.2);border:1px solid rgba(255,87,34,.3);color:#FF8A50;font-size:10px;font-weight:800;padding:2px 8px;border-radius:50px}
+.pb-range{display:flex;align-items:center;gap:6px;margin-bottom:4px;min-height:38px}
+.pr-val{font-size:28px;font-weight:900;color:#fff;letter-spacing:-1px;line-height:1;transition:opacity .3s}
+.pr-sep{font-size:16px;color:rgba(255,255,255,.35)}
+.pb-calc{
+  display:flex;align-items:center;gap:5px;
+  font-size:10px;color:rgba(255,255,255,.4);
+  transition:opacity .3s;
+}
+.pb-calc.hide{opacity:0;pointer-events:none}
+.spin{display:inline-block;width:9px;height:9px;border:2px solid rgba(255,255,255,.15);border-top-color:rgba(255,255,255,.5);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.pb-note{font-size:10px;color:rgba(255,255,255,.3);margin-top:8px;border-top:1px solid rgba(255,255,255,.07);padding-top:7px;display:flex;justify-content:space-between}
+.pb-note span{color:rgba(74,222,128,.65);font-weight:700}
+
+/* Divider */
+.form-div{display:flex;align-items:center;gap:8px;margin-bottom:11px}
+.form-div::before,.form-div::after{content:'';flex:1;height:1px;background:var(--bd)}
+.form-div span{font-size:11px;font-weight:700;color:var(--gray);white-space:nowrap}
+
+.in-row{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:11px}
 .ig label{display:block;font-size:11px;font-weight:700;color:var(--gray);margin-bottom:5px}
 .ig input{
   width:100%;padding:10px 12px;border:2px solid var(--bd);border-radius:9px;
@@ -411,56 +463,84 @@ footer{background:#070F1C;padding:28px 24px}
 
     <div class="fcard">
       <div id="form-body">
-        <div class="fc-title">פרטי ההובלה</div>
-        <div class="fc-sub">מלא ונחזור אליך עם המחיר הכי זול בארץ</div>
-
-        <div class="rl">גודל הדירה (חדרים)</div>
-        <div class="rbts">
-          <button class="rb" data-r="1" onclick="setR(1)">1</button>
-          <button class="rb" data-r="2" onclick="setR(2)">2</button>
-          <button class="rb on" data-r="3" onclick="setR(3)">3</button>
-          <button class="rb" data-r="4" onclick="setR(4)">4</button>
-          <button class="rb" data-r="5" onclick="setR(5)">5+</button>
+        <div class="calc-head">
+          <div class="calc-head-icon">🧮</div>
+          <div class="calc-head-text">
+            <div class="cht">מחשבון מחיר הובלה</div>
+            <div class="chs">הערכת עלות מיידית לפי נתוני הדירה</div>
+          </div>
+          <div class="live-badge"><span class="live-dot"></span>חי</div>
         </div>
 
-        <div class="fl-row">
-          <div class="fg">
-            <label>קומה במוצא</label>
-            <select id="ff">
-              <option>קרקע</option><option>קומה 1</option><option>קומה 2</option>
-              <option>קומה 3</option><option>קומה 4</option><option>קומה 5+</option>
-            </select>
+        <div class="fcard-body">
+          <div class="rl">מספר חדרים בדירה</div>
+          <div class="rbts">
+            <button class="rb" data-r="1" onclick="setR(1)">1</button>
+            <button class="rb" data-r="2" onclick="setR(2)">2</button>
+            <button class="rb on" data-r="3" onclick="setR(3)">3</button>
+            <button class="rb" data-r="4" onclick="setR(4)">4</button>
+            <button class="rb" data-r="5" onclick="setR(5)">5+</button>
           </div>
-          <div class="fg">
-            <label>קומה ביעד</label>
-            <select id="ft">
-              <option>קרקע</option><option>קומה 1</option><option>קומה 2</option>
-              <option>קומה 3</option><option>קומה 4</option><option>קומה 5+</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="in-row">
-          <div class="ig">
-            <label>שם מלא</label>
-            <input type="text" id="fn" placeholder="ישראל ישראלי" autocomplete="name">
+          <div class="fl-row">
+            <div class="fg">
+              <label>קומה במוצא</label>
+              <select id="ff" onchange="recalc()">
+                <option value="0">קרקע</option><option value="1">קומה 1</option><option value="2">קומה 2</option>
+                <option value="3">קומה 3</option><option value="4">קומה 4</option><option value="5">קומה 5+</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>קומה ביעד</label>
+              <select id="ft" onchange="recalc()">
+                <option value="0">קרקע</option><option value="1">קומה 1</option><option value="2">קומה 2</option>
+                <option value="3">קומה 3</option><option value="4">קומה 4</option><option value="5">קומה 5+</option>
+              </select>
+            </div>
           </div>
-          <div class="ig">
-            <label>טלפון</label>
-            <input type="tel" id="fp" placeholder="050-000-0000" autocomplete="tel">
-          </div>
-        </div>
 
-        <button class="fsub" id="fsub" onclick="submitForm()">
-          לקבלת מחיר בהנחה — לחץ כאן
-        </button>
-        <div class="fnote">ללא ספאם · חוזרים תוך שעה · 7 ימים בשבוע</div>
+          <!-- Live price box -->
+          <div class="pbox">
+            <div class="pb-top">
+              <div class="pb-label">הערכת מחיר ראשונית</div>
+              <div class="pb-disc">כולל הנחה 15%</div>
+            </div>
+            <div class="pb-range">
+              <span class="pr-val" id="pfrom">₪1,320</span>
+              <span class="pr-sep">—</span>
+              <span class="pr-val" id="pto">₪2,050</span>
+            </div>
+            <div class="pb-calc hide" id="pcalc"><span class="spin"></span> מחשב לפי נתוני הדירה...</div>
+            <div class="pb-note">
+              <span>✓ הנחת לקוח חדש כלולה</span>
+              <span style="color:rgba(255,255,255,.28)">הצעה תקפה 24 שע׳ ⏱</span>
+            </div>
+          </div>
+
+          <div class="form-div"><span>→ לקבלת המחיר המדויק</span></div>
+
+          <div class="in-row">
+            <div class="ig">
+              <label>שם מלא</label>
+              <input type="text" id="fn" placeholder="ישראל ישראלי" autocomplete="name">
+            </div>
+            <div class="ig">
+              <label>טלפון</label>
+              <input type="tel" id="fp" placeholder="050-000-0000" autocomplete="tel">
+            </div>
+          </div>
+
+          <button class="fsub" id="fsub" onclick="submitForm()">
+            שלח לי את המחיר המדויק ←
+          </button>
+          <div class="fnote">נציג יחזור תוך 10 דקות · ללא ספאם · 7 ימים בשבוע</div>
+        </div>
       </div>
 
       <div class="success" id="success">
         <div class="s-ic">✅</div>
-        <div class="s-title">קיבלנו את הפרטים!</div>
-        <div class="s-sub">נחזור אליך תוך שעה עם המחיר הכי זול בארץ.</div>
+        <div class="s-title">ההצעה שלך מוכנה!</div>
+        <div class="s-sub">נציג שלנו יתקשר אליך תוך 10 דקות עם המחיר המדויק.</div>
         <div class="s-sum" id="ssum"></div>
         <button class="s-wa" onclick="openWA()">💬 שלח גם בוואטסאפ</button>
       </div>
@@ -668,11 +748,56 @@ footer{background:#070F1C;padding:28px 24px}
 
 <script>
 const WH = 'https://script.google.com/macros/s/AKfycbx5AqlRFpmd3cP73VRY2JzpolZtNjQzWmX45JYZOnvVu57F_SrXLCQjeHvDFlSk-dS2/exec';
-let rooms = 3, ld = {};
+let rooms = 3, ld = {}, calcTimer = null;
+
+const BASE = {1:[540,820],2:[820,1280],3:[1320,2050],4:[2000,3100],5:[2700,4200]};
+
+function fmt(n){ return '₪' + n.toLocaleString('he-IL'); }
+
+function getPrices() {
+  const ff = +document.getElementById('ff').value;
+  const ft = +document.getElementById('ft').value;
+  const floors = Math.max(ff, ft);
+  const [lo, hi] = BASE[rooms] || BASE[3];
+  const add = floors * 120;
+  return [lo + add, hi + add];
+}
+
+function animateCount(el, target) {
+  const start = parseInt(el.textContent.replace(/\D/g,'')) || 0;
+  const diff = target - start;
+  const dur = 600, step = 16;
+  let t = 0;
+  const tick = () => {
+    t += step;
+    const ease = 1 - Math.pow(1 - t/dur, 3);
+    el.textContent = fmt(Math.round(start + diff * Math.min(ease, 1)));
+    if (t < dur) requestAnimationFrame(tick);
+    else el.textContent = fmt(target);
+  };
+  requestAnimationFrame(tick);
+}
+
+function recalc() {
+  const pcalc = document.getElementById('pcalc');
+  pcalc.classList.remove('hide');
+  document.getElementById('pfrom').style.opacity = '.35';
+  document.getElementById('pto').style.opacity = '.35';
+  clearTimeout(calcTimer);
+  calcTimer = setTimeout(() => {
+    const [lo, hi] = getPrices();
+    pcalc.classList.add('hide');
+    document.getElementById('pfrom').style.opacity = '1';
+    document.getElementById('pto').style.opacity = '1';
+    animateCount(document.getElementById('pfrom'), lo);
+    animateCount(document.getElementById('pto'), hi);
+  }, 1100);
+}
 
 function setR(n) {
   rooms = n;
   document.querySelectorAll('.rb').forEach(b => b.classList.toggle('on', +b.dataset.r === n));
+  recalc();
 }
 
 async function submitForm() {
