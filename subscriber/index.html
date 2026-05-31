@@ -190,7 +190,9 @@ img{display:block}
   display:flex;align-items:center;justify-content:center;
   letter-spacing:-1px;
   box-shadow:0 3px 10px rgba(30,58,95,.2);
+  overflow:hidden;
 }
+.mc-logo img{width:100%;height:100%;object-fit:cover;display:block;border-radius:0}
 .mc-info{flex:1;min-width:0}
 .mc-name{font-size:17px;font-weight:800;color:var(--tx);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mc-area{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:5px}
@@ -571,7 +573,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'חברת הובלות ותיקה עם 15 שנות ניסיון. מתמחים בהובלות דירה ומשרד בגוש דן. צוות מקצועי, ביטוח מלא, מחיר שקוף.',
     tags:['הובלת דירה','אריזה','פירוק והרכבה'],
-    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:2, name:'מובילי צפון פרמיום', initials:'צ.פ',
@@ -581,7 +584,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'המובילים המומלצים בחיפה. 12 שנות ניסיון, 3 משאיות, מגיעים לכל הצפון. ביקורות מדהימות בגוגל.',
     tags:['הובלת דירה','הובלת משרד','פינוי'],
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:3, name:'ירושלים אקספרס הובלות', initials:'י.א',
@@ -591,7 +595,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'מובילים מקצועיים בירושלים ואיזור. מתמחים בהובלות בשכונות צפופות ובבניינים ללא מעלית. תמחור הוגן.',
     tags:['הובלת דירה','בניינים ישנים','ירושלים'],
-    img:'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:4, name:'אקספרס הובלות ראשון', initials:'א.ר',
@@ -601,7 +606,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'הכי מהירים בראשון לציון. עונים בשניות, מגיעים תוך 24 שעות. מחיר תחרותי ושירות ברמה גבוהה.',
     tags:['מהיר','הובלת דירה','הובלת משרד'],
-    img:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:5, name:'הובלות הנגב', initials:'ה.נ',
@@ -611,7 +617,8 @@ const DEFAULT_MOVERS = [
     available:false,
     desc:'הובלות איכותיות בדרום הארץ. מכירים כל פינה בבאר שבע. מחירים משתלמים, עבודה נקייה ומקצועית.',
     tags:['הובלת דירה','אריזה','דרום הארץ'],
-    img:'https://images.unsplash.com/photo-1530685932526-48ec92998eaa?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1530685932526-48ec92998eaa?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:6, name:'מרכז הובלות גוש דן', initials:'מ.ג',
@@ -621,7 +628,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'מובילים מהמרכז לכל הארץ. מתמחים בהובלות ארציות ובמשרדים גדולים. 8 שנות ניסיון בגוש דן.',
     tags:['הובלה ארצית','הובלת משרד','פירוק והרכבה'],
-    img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:7, name:'פריסמה הובלות', initials:'פ.ה',
@@ -631,7 +639,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'הובלות ואחסון בפתח תקווה והסביבה. יש לנו מחסן לאחסון ריהוט בין הובלות. שירות מקיף ואמין.',
     tags:['הובלה ואחסון','הובלת דירה','פתח תקווה'],
-    img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:8, name:'הובלות ים תיכוני', initials:'י.ת',
@@ -641,7 +650,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'נתניה וסביבה — אנחנו המובילים שכולם ממליצים עליהם. 10 שנות ניסיון, ביטוח מלא, מחיר שמשתלם.',
     tags:['הובלת דירה','אריזה','נתניה'],
-    img:'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=700&q=75&fit=crop'
+    img:'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=700&q=75&fit=crop',
+    photo:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:9, name:'אשדוד הובלות מקצועי', initials:'א.מ',
@@ -651,7 +661,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'המובילים הכי טובים בדרום המרכז. עונים 24/7, מגיעים גם בסוף שבוע. ללא הפתעות במחיר.',
     tags:['זמינות 24/7','הובלת דירה','דרום מרכז'],
-    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop&crop=right'
+    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop&crop=right',
+    photo:'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=200&q=80&fit=crop&crop=face'
   },
   {
     id:10, name:'כרמל הובלות והסעות', initials:'כ.ה',
@@ -661,7 +672,8 @@ const DEFAULT_MOVERS = [
     available:true,
     desc:'הובלות בכרמל ובצפון. מכירים כל רחוב בחיפה. גישה לשכונות קשות, מחירים הוגנים.',
     tags:['הובלת דירה','חיפה','שכונות קשות'],
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop&crop=right'
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop&crop=right',
+    photo:'https://images.unsplash.com/photo-1601944177325-f8867652837f?w=200&q=80&fit=crop&crop=face'
   }
 ];
 
@@ -703,7 +715,7 @@ function renderCard(m){
       </div>
       <div class="mc-body">
         <div class="mc-top">
-          <div class="mc-logo">${m.initials}</div>
+          <div class="mc-logo">${m.photo ? `<img src="${m.photo}" alt="${m.name}">` : m.initials}</div>
           <div class="mc-info">
             <div class="mc-name">${m.name}</div>
             <div class="mc-area">📍 ${m.cityLabel}</div>
