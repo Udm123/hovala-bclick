@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>להובלה בקליק – מצא מוביל מקצועי קרוב אליך</title>
+<meta name="description" content="מאגר המובילים הגדול בישראל. מובילים מאומתים עם ביטוח מלא. חפש לפי עיר וקבל הצעות מחיר עכשיו.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bl:#1E3A5F;--bl2:#2A5298;--bl3:#EBF0F8;
+  --or:#FF5722;--ord:#E64A19;--orbg:#FFF3E0;
+  --gr:#25D366;--grd:#1EA952;
+  --gold:#FBBC05;
+  --bg:#F4F6FA;--bg2:#EDF0F7;
+  --bd:#DDE2EC;--gray:#6B7280;--tx:#111827;
+  --white:#fff;
+  --radius:14px;
+  --shadow:0 2px 14px rgba(30,58,95,.09);
+  --shadow-lg:0 8px 40px rgba(30,58,95,.14);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Assistant',sans-serif;direction:rtl;background:var(--bg);color:var(--tx);font-size:16px;line-height:1.5;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block}
+
+/* ══ TOPBAR ══ */
+.topbar{
+  position:sticky;top:0;z-index:999;
+  background:var(--bl);
+  padding:0 28px;
+  display:flex;justify-content:space-between;align-items:center;
+  height:62px;
+  box-shadow:0 2px 16px rgba(0,0,0,.2);
+}
+.logo{font-size:22px;font-weight:900;color:#fff;letter-spacing:-.3px}
+.logo span{color:#FFD54F}
+.logo small{font-size:12px;font-weight:500;color:rgba(255,255,255,.55);display:block;margin-top:-2px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.btn-join{
+  background:var(--or);color:#fff;
+  font-family:'Assistant',sans-serif;font-size:14px;font-weight:700;
+  padding:9px 22px;border-radius:50px;border:none;cursor:pointer;
+  transition:all .2s;
+  white-space:nowrap;
+}
+.btn-join:hover{background:var(--ord);transform:translateY(-1px)}
+.top-count{font-size:13px;color:rgba(255,255,255,.6);white-space:nowrap}
+@media(max-width:500px){.top-count{display:none}}
+
+/* ══ HERO ══ */
+.hero{
+  background:linear-gradient(155deg, var(--bl) 0%, #2A5298 55%, #1a4580 100%);
+  padding:60px 24px 52px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-wrap{position:relative;z-index:1;max-width:780px;margin:0 auto}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.9);padding:6px 18px;border-radius:50px;
+  font-size:13px;font-weight:700;margin-bottom:20px;
+  backdrop-filter:blur(4px);
+}
+.hero h1{
+  font-size:clamp(26px,4.5vw,50px);font-weight:900;
+  color:#fff;line-height:1.15;margin-bottom:12px;
+  text-shadow:0 2px 12px rgba(0,0,0,.2);
+}
+.hero h1 em{color:#FFD54F;font-style:normal;display:block}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,.78);margin-bottom:36px;font-weight:500}
+
+/* Search box */
+.search-box{
+  background:#fff;border-radius:16px;
+  padding:6px 6px 6px 16px;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);
+  max-width:580px;margin:0 auto 24px;
+}
+.search-box select{
+  flex:1;border:none;outline:none;
+  font-family:'Assistant',sans-serif;font-size:17px;font-weight:600;color:var(--tx);
+  background:transparent;direction:rtl;cursor:pointer;padding:10px 4px;
+  appearance:none;-webkit-appearance:none;
+}
+.sb-sep{width:1px;height:28px;background:var(--bd);flex-shrink:0}
+.sb-btn{
+  background:var(--or);color:#fff;border:none;cursor:pointer;
+  font-family:'Assistant',sans-serif;font-size:16px;font-weight:800;
+  padding:13px 28px;border-radius:11px;
+  transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.sb-btn:hover{background:var(--ord);transform:translateY(-1px)}
+
+/* Hero trust pills */
+.hero-trust{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.ht{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:13px;font-weight:600;padding:6px 14px;border-radius:50px}
+
+/* ══ FILTER BAR ══ */
+.filter-wrap{background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:62px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.filter-inner{
+  max-width:1200px;margin:0 auto;
+  padding:0 20px;
+  display:flex;align-items:center;gap:6px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+  height:52px;
+}
+.filter-inner::-webkit-scrollbar{display:none}
+.ftab{
+  flex-shrink:0;
+  padding:7px 18px;border-radius:50px;
+  font-family:'Assistant',sans-serif;font-size:14px;font-weight:700;
+  border:2px solid var(--bd);background:#fff;color:var(--gray);
+  cursor:pointer;transition:all .18s;white-space:nowrap;
+}
+.ftab:hover{border-color:var(--bl);color:var(--bl)}
+.ftab.on{background:var(--bl);border-color:var(--bl);color:#fff;box-shadow:0 3px 12px rgba(30,58,95,.25)}
+.filter-count{flex-shrink:0;font-size:13px;color:var(--gray);margin-right:8px;white-space:nowrap}
+
+/* ══ MAIN LAYOUT ══ */
+.main{max-width:1200px;margin:0 auto;padding:28px 20px 60px}
+
+/* Sort bar */
+.sort-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px}
+.res-count{font-size:15px;font-weight:700;color:var(--tx)}
+.res-count span{color:var(--or)}
+.sort-sel{
+  border:2px solid var(--bd);border-radius:9px;padding:7px 14px;
+  font-family:'Assistant',sans-serif;font-size:14px;font-weight:600;color:var(--tx);
+  background:#fff;direction:rtl;cursor:pointer;outline:none;
+  appearance:none;-webkit-appearance:none;
+}
+.sort-sel:focus{border-color:var(--bl)}
+
+/* ══ MOVERS GRID ══ */
+.movers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+@media(max-width:760px){.movers-grid{grid-template-columns:1fr}}
+
+/* ══ MOVER CARD ══ */
+.mcard{
+  background:#fff;border-radius:var(--radius);
+  border:1.5px solid var(--bd);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transition:transform .22s,box-shadow .22s;
+  display:flex;flex-direction:column;
+}
+.mcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.mcard.featured{border-color:var(--gold);box-shadow:0 3px 20px rgba(251,188,5,.2)}
+
+/* Card top banner */
+.mc-banner{height:120px;position:relative;overflow:hidden;background:var(--bg2)}
+.mc-banner img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.mcard:hover .mc-banner img{transform:scale(1.04)}
+.mc-featured-badge{
+  position:absolute;top:10px;right:10px;z-index:2;
+  background:var(--gold);color:#7C5800;
+  font-size:11px;font-weight:800;padding:3px 10px;border-radius:50px;
+  display:flex;align-items:center;gap:4px;
+}
+.mc-verified{
+  position:absolute;top:10px;left:10px;z-index:2;
+  background:#fff;color:#1B5E20;
+  font-size:11px;font-weight:800;padding:4px 10px;border-radius:50px;
+  display:flex;align-items:center;gap:4px;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+/* Card body */
+.mc-body{padding:18px 18px 14px;flex:1;display:flex;flex-direction:column}
+
+/* Company header */
+.mc-top{display:flex;align-items:flex-start;gap:13px;margin-bottom:12px}
+.mc-logo{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--bl),var(--bl2));
+  color:#fff;font-size:20px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  letter-spacing:-1px;
+  box-shadow:0 3px 10px rgba(30,58,95,.2);
+}
+.mc-info{flex:1;min-width:0}
+.mc-name{font-size:17px;font-weight:800;color:var(--tx);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-area{font-size:13px;color:var(--gray);display:flex;align-items:center;gap:5px}
+
+/* Rating */
+.mc-rating{display:flex;align-items:center;gap:6px;margin-top:4px}
+.mc-stars{color:var(--gold);font-size:14px;letter-spacing:.5px}
+.mc-score{font-size:15px;font-weight:800;color:var(--tx)}
+.mc-rcount{font-size:12px;color:var(--gray)}
+
+/* Tags */
+.mc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.mc-tag{
+  background:var(--bg2);color:var(--bl);
+  font-size:12px;font-weight:700;padding:4px 11px;border-radius:50px;
+  display:flex;align-items:center;gap:4px;
+}
+.mc-tag.green{background:#E8F5E9;color:#1B5E20}
+.mc-tag.orange{background:var(--orbg);color:var(--or)}
+
+/* Description */
+.mc-desc{font-size:13px;color:var(--gray);line-height:1.65;margin-bottom:14px;flex:1}
+
+/* Card footer */
+.mc-foot{border-top:1px solid var(--bg2);padding-top:14px;display:flex;gap:8px}
+.mc-wa{
+  flex-shrink:0;width:46px;height:46px;border-radius:11px;
+  background:var(--gr);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  transition:background .18s,transform .18s;
+}
+.mc-wa:hover{background:var(--grd);transform:scale(1.06)}
+.mc-phone{
+  flex:1;background:var(--or);color:#fff;border:none;cursor:pointer;
+  font-family:'Assistant',sans-serif;font-size:16px;font-weight:800;
+  border-radius:11px;padding:11px 16px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background .18s,transform .18s;
+  box-shadow:0 3px 14px rgba(255,87,34,.3);
+}
+.mc-phone:hover{background:var(--ord);transform:translateY(-1px);box-shadow:0 5px 20px rgba(255,87,34,.4)}
+.mc-phone .ph-num{font-size:15px;letter-spacing:.5px}
+
+/* Availability dot */
+.mc-avail{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--gray);margin-bottom:10px}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+.avail-dot.busy{background:#FBB030;animation:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+
+/* ══ NO RESULTS ══ */
+.no-results{text-align:center;padding:60px 20px;grid-column:1/-1}
+.no-results h3{font-size:20px;font-weight:700;color:var(--tx);margin-bottom:8px}
+.no-results p{font-size:15px;color:var(--gray)}
+
+/* ══ JOIN BANNER ══ */
+.join-banner{
+  background:linear-gradient(135deg,var(--bl),#2A5298);
+  border-radius:20px;margin:40px 0 0;padding:48px 40px;
+  display:flex;align-items:center;gap:40px;
+  overflow:hidden;position:relative;
+}
+.join-banner::after{
+  content:'🚛';
+  position:absolute;left:-10px;bottom:-20px;
+  font-size:140px;opacity:.08;transform:scaleX(-1);
+}
+.jb-text{flex:1;position:relative;z-index:1}
+.jb-tag{display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:12px;font-weight:700;padding:4px 14px;border-radius:50px;margin-bottom:12px}
+.jb-h{font-size:clamp(20px,2.8vw,32px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:10px}
+.jb-h em{color:#FFD54F;font-style:normal}
+.jb-p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.6;margin-bottom:20px}
+.jb-checks{display:flex;flex-direction:column;gap:7px;margin-bottom:24px}
+.jbc{display:flex;align-items:center;gap:8px;font-size:14px;color:rgba(255,255,255,.85);font-weight:600}
+.jbc-ic{color:#4ADE80;font-size:14px}
+.jb-btns{display:flex;gap:10px;flex-wrap:wrap}
+.jb-btn-main{
+  background:var(--or);color:#fff;padding:14px 30px;border-radius:11px;
+  font-family:'Assistant',sans-serif;font-size:16px;font-weight:800;border:none;cursor:pointer;
+  transition:all .2s;box-shadow:0 4px 18px rgba(255,87,34,.4);
+}
+.jb-btn-main:hover{background:var(--ord);transform:translateY(-2px)}
+.jb-btn-sec{
+  background:rgba(255,255,255,.1);color:#fff;padding:14px 24px;border-radius:11px;
+  font-family:'Assistant',sans-serif;font-size:15px;font-weight:700;
+  border:2px solid rgba(255,255,255,.25);cursor:pointer;transition:all .2s;
+}
+.jb-btn-sec:hover{background:rgba(255,255,255,.18)}
+.jb-price{flex-shrink:0;position:relative;z-index:1}
+.jp-card{
+  background:rgba(255,255,255,.1);backdrop-filter:blur(8px);
+  border:1.5px solid rgba(255,255,255,.2);
+  border-radius:16px;padding:28px 30px;text-align:center;min-width:200px;
+}
+.jp-label{font-size:12px;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.jp-price-num{font-size:48px;font-weight:900;color:#FFD54F;line-height:1}
+.jp-per{font-size:14px;color:rgba(255,255,255,.6);font-weight:600;margin-top:4px}
+.jp-line{height:1px;background:rgba(255,255,255,.15);margin:16px 0}
+.jp-feats{text-align:right}
+.jp-feat{font-size:13px;color:rgba(255,255,255,.82);font-weight:600;padding:3px 0;display:flex;align-items:center;gap:6px}
+.jp-feat::before{content:'✓';color:#4ADE80;font-weight:900}
+@media(max-width:800px){
+  .join-banner{flex-direction:column;padding:32px 24px}
+  .jb-price{width:100%}
+  .jp-card{min-width:unset}
+}
+
+/* ══ HOW IT WORKS (for movers) ══ */
+.hiw-section{padding:60px 20px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:40px}
+.sh-tag{display:inline-block;background:var(--orbg);color:var(--or);font-size:13px;font-weight:700;padding:5px 16px;border-radius:50px;margin-bottom:10px}
+.sh-h{font-size:clamp(20px,2.8vw,32px);font-weight:800;color:var(--tx);margin-bottom:8px}
+.sh-p{font-size:15px;color:var(--gray);max-width:540px;margin:0 auto}
+.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:680px){.hiw-grid{grid-template-columns:1fr;gap:16px}}
+.hiw-card{background:#fff;border-radius:var(--radius);border:1.5px solid var(--bd);padding:28px 24px;text-align:center;position:relative}
+.hiw-num{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--bl),var(--bl2));color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 4px 14px rgba(30,58,95,.25)}
+.hiw-icon{font-size:28px;margin-bottom:10px}
+.hiw-h{font-size:16px;font-weight:800;color:var(--tx);margin-bottom:7px}
+.hiw-p{font-size:13px;color:var(--gray);line-height:1.65}
+
+/* ══ FOOTER ══ */
+footer{background:#0D1B2A;padding:32px 24px}
+.foot-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.foot-logo{font-size:20px;font-weight:900;color:#fff}
+.foot-logo span{color:#FFD54F}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+.foot-links a{font-size:13px;color:rgba(255,255,255,.4);transition:color .18s}
+.foot-links a:hover{color:var(--or)}
+.foot-copy{font-size:12px;color:rgba(255,255,255,.25);width:100%;text-align:center;margin-top:8px}
+
+/* ══ MODAL ══ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:480px;overflow:hidden;animation:modalIn .3s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes modalIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.modal-head{background:linear-gradient(135deg,var(--bl),var(--bl2));padding:24px 24px 20px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{font-size:20px;font-weight:900;color:#fff}
+.modal-close{background:rgba(255,255,255,.15);border:none;cursor:pointer;width:32px;height:32px;border-radius:50%;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.modal-close:hover{background:rgba(255,255,255,.25)}
+.modal-body{padding:24px}
+.mover-modal-top{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--bd)}
+.mml{width:58px;height:58px;border-radius:13px;background:linear-gradient(135deg,var(--bl),var(--bl2));color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mmn{font-size:18px;font-weight:800;color:var(--tx)}
+.mma{font-size:13px;color:var(--gray);margin-top:2px}
+.mms{color:var(--gold);font-size:14px;margin-top:3px}
+.modal-phone-btn{
+  width:100%;background:var(--or);color:#fff;border:none;cursor:pointer;
+  font-family:'Assistant',sans-serif;font-size:20px;font-weight:800;
+  padding:16px;border-radius:13px;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 4px 20px rgba(255,87,34,.35);
+  transition:all .2s;
+}
+.modal-phone-btn:hover{background:var(--ord);transform:translateY(-1px)}
+.modal-wa-btn{
+  width:100%;background:var(--gr);color:#fff;border:none;cursor:pointer;
+  font-family:'Assistant',sans-serif;font-size:16px;font-weight:700;
+  padding:13px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all .2s;
+}
+.modal-wa-btn:hover{background:var(--grd)}
+.modal-note{text-align:center;font-size:12px;color:var(--gray);margin-top:12px}
+.modal-services{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.ms-tag{background:var(--bg);color:var(--bl);font-size:12px;font-weight:700;padding:5px 13px;border-radius:50px;display:flex;align-items:center;gap:4px}
+
+/* Reveal animation */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .55s,transform .55s}
+.rv.in{opacity:1;transform:none}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:600px){
+  .hero{padding:40px 16px 36px}
+  .search-box{flex-wrap:wrap;padding:12px;gap:10px;border-radius:14px}
+  .search-box select{width:100%;font-size:16px}
+  .sb-sep{display:none}
+  .sb-btn{width:100%;justify-content:center;padding:13px}
+  .main{padding:20px 14px 50px}
+  .sort-bar{flex-direction:column;align-items:flex-start}
+  .topbar{padding:0 16px}
+  .logo small{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo">
+    להובלה <span>בקליק</span>
+    <small>מאגר המובילים הגדול בישראל</small>
+  </div>
+  <div class="top-actions">
+    <span class="top-count">74 מובילים פעילים</span>
+    <button class="btn-join" onclick="document.getElementById('join-section').scrollIntoView({behavior:'smooth'})">אתה מוביל? הצטרף ←</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-wrap">
+    <div class="hero-tag">🏆 מאגר המובילים הגדול בישראל · 74 מובילים מאומתים</div>
+    <h1>מצא מוביל מקצועי<em>קרוב אליך — עכשיו</em></h1>
+    <p class="hero-sub">כל המובילים עם ביטוח מלא, דירוג גוגל אמיתי ומחיר שקוף</p>
+
+    <div class="search-box">
+      <span style="font-size:22px;flex-shrink:0">📍</span>
+      <select id="hero-city" onchange="filterByCity(this.value)">
+        <option value="all">בחר עיר / אזור</option>
+        <option value="tel-aviv">תל אביב והמרכז</option>
+        <option value="jerusalem">ירושלים והסביבה</option>
+        <option value="haifa">חיפה והצפון</option>
+        <option value="rishon">ראשון לציון / רחובות</option>
+        <option value="beer-sheva">באר שבע והדרום</option>
+        <option value="netanya">נתניה / חדרה</option>
+        <option value="petah-tikva">פתח תקווה / בני ברק</option>
+        <option value="ashdod">אשדוד / אשקלון</option>
+      </select>
+      <div class="sb-sep"></div>
+      <button class="sb-btn" onclick="applyHeroSearch()">🔍 חפש מובילים</button>
+    </div>
+
+    <div class="hero-trust">
+      <div class="ht">✅ ביטוח מלא</div>
+      <div class="ht">⭐ דירוג אמיתי מגוגל</div>
+      <div class="ht">📞 קבל מחיר בשיחה אחת</div>
+      <div class="ht">🔒 ללא עמלה</div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <span class="filter-count" id="filter-count">74 מובילים</span>
+    <button class="ftab on" onclick="setFilter('all',this)">הכל</button>
+    <button class="ftab" onclick="setFilter('tel-aviv',this)">תל אביב</button>
+    <button class="ftab" onclick="setFilter('jerusalem',this)">ירושלים</button>
+    <button class="ftab" onclick="setFilter('haifa',this)">חיפה</button>
+    <button class="ftab" onclick="setFilter('rishon',this)">ראשון לציון</button>
+    <button class="ftab" onclick="setFilter('beer-sheva',this)">באר שבע</button>
+    <button class="ftab" onclick="setFilter('netanya',this)">נתניה</button>
+    <button class="ftab" onclick="setFilter('petah-tikva',this)">פתח תקווה</button>
+    <button class="ftab" onclick="setFilter('ashdod',this)">אשדוד</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- Sort bar -->
+  <div class="sort-bar">
+    <div class="res-count" id="res-count">מציג <span id="count-num">10</span> מובילים</div>
+    <select class="sort-sel" id="sort-sel" onchange="sortMovers()">
+      <option value="featured">מובלטים ראשונים</option>
+      <option value="rating">דירוג גבוה ביותר</option>
+      <option value="reviews">הכי הרבה ביקורות</option>
+    </select>
+  </div>
+
+  <!-- Cards grid -->
+  <div class="movers-grid rv" id="movers-grid"></div>
+
+  <!-- Join banner -->
+  <div class="join-banner rv" id="join-section">
+    <div class="jb-text">
+      <div class="jb-tag">למובילים</div>
+      <div class="jb-h">אתה מוביל? קבל <em>לקוחות חדשים</em><br>כל חודש — בלי להתאמץ</div>
+      <p class="jb-p">הצטרף למאגר, הזן את הפרטים שלך, ולקוחות יתקשרו ישירות אליך. אנחנו מביאים את התנועה — אתה סוגר עסקאות.</p>
+      <div class="jb-checks">
+        <div class="jbc"><span class="jbc-ic">✓</span>מופיע עם מספר טלפון, תיאור ודירוג</div>
+        <div class="jbc"><span class="jbc-ic">✓</span>לקוחות מתקשרים ישירות אליך — אין עמלה</div>
+        <div class="jbc"><span class="jbc-ic">✓</span>ביטול בכל עת, ללא התחייבות</div>
+        <div class="jbc"><span class="jbc-ic">✓</span>הגדרה תוך 10 דקות</div>
+      </div>
+      <div class="jb-btns">
+        <button class="jb-btn-main" onclick="alert('ממשק הרשמה יפתח בקרוב!')">הצטרף עכשיו ←</button>
+        <button class="jb-btn-sec" onclick="alert('נציג שלנו יחזור אליך!')">השאר פרטים</button>
+      </div>
+    </div>
+    <div class="jb-price">
+      <div class="jp-card">
+        <div class="jp-label">מחיר מנוי חודשי</div>
+        <div class="jp-price-num">₪299</div>
+        <div class="jp-per">לחודש · ביטול חופשי</div>
+        <div class="jp-line"></div>
+        <div class="jp-feats">
+          <div class="jp-feat">דף עסק מלא</div>
+          <div class="jp-feat">מספר טלפון בולט</div>
+          <div class="jp-feat">תיאור שירותים</div>
+          <div class="jp-feat">בדג "מאומת"</div>
+          <div class="jp-feat">סטטיסטיקות שיחות</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="hiw-section rv">
+  <div class="section-header">
+    <div class="sh-tag">איך זה עובד</div>
+    <div class="sh-h">3 צעדים לקבלת לקוחות חדשים</div>
+    <p class="sh-p">הצטרף למאגר, הגדר פרופיל, וקבל שיחות</p>
+  </div>
+  <div class="hiw-grid">
+    <div class="hiw-card">
+      <div class="hiw-num">1</div>
+      <div class="hiw-icon">📝</div>
+      <div class="hiw-h">הרשם ומלא פרטים</div>
+      <p class="hiw-p">שם החברה, אזורי פעילות, שירותים, מספר טלפון — הגדרה בעשר דקות.</p>
+    </div>
+    <div class="hiw-card">
+      <div class="hiw-num">2</div>
+      <div class="hiw-icon">🔍</div>
+      <div class="hiw-h">לקוחות מוצאים אותך</div>
+      <p class="hiw-p">אנחנו מביאים תנועה ממודעות גוגל. לקוחות מחפשים מוביל — ורואים אותך ראשון.</p>
+    </div>
+    <div class="hiw-card">
+      <div class="hiw-num">3</div>
+      <div class="hiw-icon">📞</div>
+      <div class="hiw-h">מקבל שיחות ישירות</div>
+      <p class="hiw-p">לקוחות מתקשרים ישירות למספר שלך. אין מתווך, אין עמלה, רק שיחות.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-logo">להובלה <span>בקליק</span></div>
+    <div class="foot-links">
+      <a href="#">צור קשר</a>
+      <a href="#">תנאי שימוש</a>
+      <a href="#">פרטיות</a>
+      <a href="#join-section">הצטרף כמוביל</a>
+    </div>
+  </div>
+  <div class="foot-copy">© 2026 להובלה בקליק — כל הזכויות שמורות</div>
+</footer>
+
+<!-- PHONE MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title">פרטי קשר</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="mover-modal-top">
+        <div class="mml" id="modal-logo"></div>
+        <div>
+          <div class="mmn" id="modal-name"></div>
+          <div class="mma" id="modal-area"></div>
+          <div class="mms" id="modal-stars"></div>
+        </div>
+      </div>
+      <div class="modal-services" id="modal-services"></div>
+      <button class="modal-phone-btn" id="modal-phone-btn">
+        📞 <span id="modal-phone-num"></span>
+      </button>
+      <button class="modal-wa-btn" id="modal-wa-btn">
+        💬 שלח הודעה בוואטסאפ
+      </button>
+      <div class="modal-note">לחיצה על הטלפון תחייג ישירות לעסק</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const MOVERS = [
+  {
+    id:1, name:'הובלות כהן ובניו', initials:'כ.ב',
+    city:'tel-aviv', cityLabel:'תל אביב, גוש דן',
+    rating:4.9, reviews:124, featured:true,
+    phone:'052-111-2233', wa:'972521112233',
+    available:true,
+    desc:'חברת הובלות ותיקה עם 15 שנות ניסיון. מתמחים בהובלות דירה ומשרד בגוש דן. צוות מקצועי, ביטוח מלא, מחיר שקוף.',
+    tags:['הובלת דירה','אריזה','פירוק והרכבה'],
+    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop'
+  },
+  {
+    id:2, name:'מובילי צפון פרמיום', initials:'צ.פ',
+    city:'haifa', cityLabel:'חיפה, קריות, עכו',
+    rating:4.8, reviews:87, featured:true,
+    phone:'054-222-3344', wa:'972542223344',
+    available:true,
+    desc:'המובילים המומלצים בחיפה. 12 שנות ניסיון, 3 משאיות, מגיעים לכל הצפון. ביקורות מדהימות בגוגל.',
+    tags:['הובלת דירה','הובלת משרד','פינוי'],
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop'
+  },
+  {
+    id:3, name:'ירושלים אקספרס הובלות', initials:'י.א',
+    city:'jerusalem', cityLabel:'ירושלים, בית שמש, מודיעין',
+    rating:4.7, reviews:96, featured:false,
+    phone:'053-333-4455', wa:'972533334455',
+    available:true,
+    desc:'מובילים מקצועיים בירושלים ואיזור. מתמחים בהובלות בשכונות צפופות ובבניינים ללא מעלית. תמחור הוגן.',
+    tags:['הובלת דירה','בניינים ישנים','ירושלים'],
+    img:'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=700&q=75&fit=crop'
+  },
+  {
+    id:4, name:'אקספרס הובלות ראשון', initials:'א.ר',
+    city:'rishon', cityLabel:'ראשון לציון, רחובות, נס ציונה',
+    rating:4.9, reviews:53, featured:true,
+    phone:'058-444-5566', wa:'972584445566',
+    available:true,
+    desc:'הכי מהירים בראשון לציון. עונים בשניות, מגיעים תוך 24 שעות. מחיר תחרותי ושירות ברמה גבוהה.',
+    tags:['מהיר','הובלת דירה','הובלת משרד'],
+    img:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=75&fit=crop'
+  },
+  {
+    id:5, name:'הובלות הנגב', initials:'ה.נ',
+    city:'beer-sheva', cityLabel:'באר שבע, דימונה, ערד',
+    rating:4.6, reviews:41, featured:false,
+    phone:'050-555-6677', wa:'972505556677',
+    available:false,
+    desc:'הובלות איכותיות בדרום הארץ. מכירים כל פינה בבאר שבע. מחירים משתלמים, עבודה נקייה ומקצועית.',
+    tags:['הובלת דירה','אריזה','דרום הארץ'],
+    img:'https://images.unsplash.com/photo-1530685932526-48ec92998eaa?w=700&q=75&fit=crop'
+  },
+  {
+    id:6, name:'מרכז הובלות גוש דן', initials:'מ.ג',
+    city:'tel-aviv', cityLabel:'רמת גן, גבעתיים, בני ברק',
+    rating:4.8, reviews:78, featured:false,
+    phone:'052-666-7788', wa:'972526667788',
+    available:true,
+    desc:'מובילים מהמרכז לכל הארץ. מתמחים בהובלות ארציות ובמשרדים גדולים. 8 שנות ניסיון בגוש דן.',
+    tags:['הובלה ארצית','הובלת משרד','פירוק והרכבה'],
+    img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=75&fit=crop'
+  },
+  {
+    id:7, name:'פריסמה הובלות', initials:'פ.ה',
+    city:'petah-tikva', cityLabel:'פתח תקווה, אור יהודה, קריית אונו',
+    rating:4.7, reviews:62, featured:false,
+    phone:'054-777-8899', wa:'972547778899',
+    available:true,
+    desc:'הובלות ואחסון בפתח תקווה והסביבה. יש לנו מחסן לאחסון ריהוט בין הובלות. שירות מקיף ואמין.',
+    tags:['הובלה ואחסון','הובלת דירה','פתח תקווה'],
+    img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&fit=crop'
+  },
+  {
+    id:8, name:'הובלות ים תיכוני', initials:'י.ת',
+    city:'netanya', cityLabel:'נתניה, חדרה, כפר סבא',
+    rating:4.8, reviews:45, featured:false,
+    phone:'055-888-9900', wa:'972558889900',
+    available:true,
+    desc:'נתניה וסביבה — אנחנו המובילים שכולם ממליצים עליהם. 10 שנות ניסיון, ביטוח מלא, מחיר שמשתלם.',
+    tags:['הובלת דירה','אריזה','נתניה'],
+    img:'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=700&q=75&fit=crop'
+  },
+  {
+    id:9, name:'אשדוד הובלות מקצועי', initials:'א.מ',
+    city:'ashdod', cityLabel:'אשדוד, אשקלון, קריית גת',
+    rating:4.7, reviews:38, featured:false,
+    phone:'057-999-0011', wa:'972579990011',
+    available:true,
+    desc:'המובילים הכי טובים בדרום המרכז. עונים 24/7, מגיעים גם בסוף שבוע. ללא הפתעות במחיר.',
+    tags:['זמינות 24/7','הובלת דירה','דרום מרכז'],
+    img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop&crop=right'
+  },
+  {
+    id:10, name:'כרמל הובלות והסעות', initials:'כ.ה',
+    city:'haifa', cityLabel:'חיפה, טירת כרמל, זכרון יעקב',
+    rating:4.9, reviews:29, featured:false,
+    phone:'050-112-2334', wa:'972501122334',
+    available:true,
+    desc:'הובלות בכרמל ובצפון. מכירים כל רחוב בחיפה. גישה לשכונות קשות, מחירים הוגנים.',
+    tags:['הובלת דירה','חיפה','שכונות קשות'],
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop&crop=right'
+  }
+];
+
+let currentFilter = 'all';
+let currentSort = 'featured';
+
+function starsHTML(r){
+  const full = Math.floor(r), half = r % 1 >= .5;
+  let s = '★'.repeat(full);
+  if(half) s += '½';
+  return s;
+}
+
+function getTagClass(tag){
+  if(tag.includes('ביטוח') || tag.includes('מאומת')) return 'green';
+  if(tag.includes('מהיר') || tag.includes('24/7')) return 'orange';
+  return '';
+}
+
+function renderCard(m){
+  const avDot = m.available
+    ? '<span class="avail-dot"></span> זמין לתיאום עכשיו'
+    : '<span class="avail-dot busy"></span> עסוק — ניתן להשאיר פרטים';
+  const tags = m.tags.map(t => `<div class="mc-tag ${getTagClass(t)}">${t}</div>`).join('');
+  const featuredBadge = m.featured ? '<div class="mc-featured-badge">⭐ מובלט</div>' : '';
+  return `
+    <div class="mcard${m.featured ? ' featured' : ''}" data-city="${m.city}">
+      <div class="mc-banner">
+        <img src="${m.img}" alt="${m.name}" loading="lazy">
+        ${featuredBadge}
+        <div class="mc-verified">✅ מאומת</div>
+      </div>
+      <div class="mc-body">
+        <div class="mc-top">
+          <div class="mc-logo">${m.initials}</div>
+          <div class="mc-info">
+            <div class="mc-name">${m.name}</div>
+            <div class="mc-area">📍 ${m.cityLabel}</div>
+            <div class="mc-rating">
+              <span class="mc-stars">${starsHTML(m.rating)}</span>
+              <span class="mc-score">${m.rating}</span>
+              <span class="mc-rcount">(${m.reviews} ביקורות)</span>
+            </div>
+          </div>
+        </div>
+        <div class="mc-avail">${avDot}</div>
+        <div class="mc-tags">${tags}</div>
+        <p class="mc-desc">${m.desc}</p>
+        <div class="mc-foot">
+          <button class="mc-wa" title="וואטסאפ" onclick="openWA('${m.wa}','${m.name}')">💬</button>
+          <button class="mc-phone" onclick="openModal(${m.id})">
+            📞 <span class="ph-num">${m.phone}</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function getFiltered(){
+  return MOVERS.filter(m => currentFilter === 'all' || m.city === currentFilter);
+}
+
+function getSorted(arr){
+  const s = currentSort;
+  return [...arr].sort((a,b)=>{
+    if(s==='rating') return b.rating - a.rating;
+    if(s==='reviews') return b.reviews - a.reviews;
+    // featured: featured first, then rating
+    if(b.featured !== a.featured) return (b.featured?1:0)-(a.featured?1:0);
+    return b.rating - a.rating;
+  });
+}
+
+function renderMovers(){
+  const filtered = getSorted(getFiltered());
+  const grid = document.getElementById('movers-grid');
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="no-results"><h3>לא נמצאו מובילים באזור זה עדיין</h3><p>אנחנו מרחיבים כל הזמן — חזור בקרוב, או בחר אזור אחר.</p></div>`;
+    document.getElementById('count-num').textContent = '0';
+    document.getElementById('filter-count').textContent = '0 מובילים';
+    return;
+  }
+  grid.innerHTML = filtered.map(renderCard).join('');
+  document.getElementById('count-num').textContent = filtered.length;
+  document.getElementById('filter-count').textContent = filtered.length + ' מובילים';
+}
+
+function setFilter(city, btn){
+  currentFilter = city;
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  renderMovers();
+}
+
+function filterByCity(city){
+  currentFilter = city;
+  document.querySelectorAll('.ftab').forEach(t => {
+    t.classList.toggle('on', t.getAttribute('onclick').includes(`'${city}'`));
+  });
+  renderMovers();
+}
+
+function applyHeroSearch(){
+  const city = document.getElementById('hero-city').value;
+  filterByCity(city);
+  document.querySelector('.filter-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+function sortMovers(){
+  currentSort = document.getElementById('sort-sel').value;
+  renderMovers();
+}
+
+function openModal(id){
+  const m = MOVERS.find(x => x.id === id);
+  if(!m) return;
+  document.getElementById('modal-title').textContent = m.name;
+  document.getElementById('modal-logo').textContent = m.initials;
+  document.getElementById('modal-name').textContent = m.name;
+  document.getElementById('modal-area').textContent = '📍 ' + m.cityLabel;
+  document.getElementById('modal-stars').textContent = starsHTML(m.rating) + ' ' + m.rating + ' (' + m.reviews + ' ביקורות)';
+  document.getElementById('modal-phone-num').textContent = m.phone;
+  document.getElementById('modal-phone-btn').href = 'tel:' + m.phone.replace(/-/g,'');
+  document.getElementById('modal-phone-btn').onclick = () => window.location.href = 'tel:' + m.phone.replace(/-/g,'');
+  document.getElementById('modal-wa-btn').onclick = () => openWA(m.wa, m.name);
+  document.getElementById('modal-services').innerHTML = m.tags.map(t => `<div class="ms-tag">✓ ${t}</div>`).join('');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e){
+  if(!e || e.target === document.getElementById('modal') || e.currentTarget === document.querySelector('.modal-close')){
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.querySelector('.modal-close').addEventListener('click', () => closeModal({}));
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal({target:document.getElementById('modal')}); });
+
+function openWA(wa, name){
+  const msg = `שלום! ראיתי אתכם באתר "להובלה בקליק" ואני מעוניין לקבל הצעת מחיר להובלה.`;
+  window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// Reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.08});
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Init
+renderMovers();
+</script>
+</body>
+</html>
