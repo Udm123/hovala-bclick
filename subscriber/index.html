@@ -686,7 +686,7 @@ function renderCard(m){
     ? '<span class="avail-dot"></span> זמין לתיאום עכשיו'
     : '<span class="avail-dot busy"></span> עסוק — ניתן להשאיר פרטים';
   const tags = m.tags.map(t => `<div class="mc-tag ${getTagClass(t)}">${t}</div>`).join('');
-  const featuredBadge = m.featured ? '<div class="mc-featured-badge">⭐ מובלט</div>' : '';
+  const featuredBadge = m.featured ? '<div class="mc-featured-badge">⭐ VIP</div>' : '';
   return `
     <div class="mcard${m.featured ? ' featured' : ''}" data-city="${m.city}">
       <div class="mc-banner">
