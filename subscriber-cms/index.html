@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>להובלה בקליק — ניהול מובילים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bl:#1E3A5F;--bl2:#2A5298;--bl3:#EBF0F8;
+  --or:#FF5722;--ord:#E64A19;
+  --gr:#25D366;
+  --gold:#FBBC05;
+  --red:#EF4444;--green:#22C55E;
+  --bg:#F4F6FA;--bg2:#EDF0F7;
+  --bd:#DDE2EC;--gray:#6B7280;--tx:#111827;
+  --sidebar-w:240px;
+}
+html{height:100%}
+body{font-family:'Assistant',sans-serif;direction:rtl;background:var(--bg);color:var(--tx);font-size:15px;line-height:1.5;height:100%;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+input,select,textarea,button{font-family:'Assistant',sans-serif}
+
+/* ══ LOGIN ══ */
+#login-screen{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(155deg,var(--bl) 0%,#2A5298 100%);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.login-card{
+  background:#fff;border-radius:20px;padding:44px 40px 36px;
+  width:100%;max-width:400px;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  text-align:center;
+  animation:loginDrop .4s cubic-bezier(.175,.885,.32,1.275);
+}
+@keyframes loginDrop{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+.login-logo{font-size:26px;font-weight:900;color:var(--bl);margin-bottom:4px}
+.login-logo span{color:var(--or)}
+.login-sub{font-size:13px;color:var(--gray);margin-bottom:32px}
+.lf-group{margin-bottom:16px;text-align:right}
+.lf-group label{display:block;font-size:12px;font-weight:700;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.lf-group input{
+  width:100%;padding:12px 14px;border:2px solid var(--bd);border-radius:10px;
+  font-size:16px;color:var(--tx);direction:rtl;outline:none;
+  transition:border-color .18s;background:#fafafa;
+}
+.lf-group input:focus{border-color:var(--bl);background:#fff}
+.login-btn{
+  width:100%;background:linear-gradient(135deg,var(--bl),var(--bl2));
+  color:#fff;border:none;padding:14px;border-radius:11px;
+  font-size:17px;font-weight:800;cursor:pointer;margin-top:8px;
+  transition:all .2s;box-shadow:0 4px 16px rgba(30,58,95,.3);
+}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,58,95,.4)}
+.login-err{background:#FEE2E2;color:#991B1B;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;margin-top:12px;display:none}
+
+/* ══ CMS SHELL ══ */
+#cms-main{display:none;height:100vh;flex-direction:row}
+#cms-main.show{display:flex}
+
+/* SIDEBAR */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--bl);
+  display:flex;flex-direction:column;
+  height:100vh;position:sticky;top:0;
+  overflow-y:auto;
+}
+.sb-logo{padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sb-logo-text{font-size:19px;font-weight:900;color:#fff}
+.sb-logo-text span{color:#FFD54F}
+.sb-logo-sub{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+.sb-nav{padding:12px 0;flex:1}
+.sb-section{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.8px;padding:16px 20px 6px}
+.sb-link{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 20px;font-size:14px;font-weight:600;
+  color:rgba(255,255,255,.7);cursor:pointer;
+  transition:all .16s;border-right:3px solid transparent;
+}
+.sb-link:hover{background:rgba(255,255,255,.07);color:#fff}
+.sb-link.on{background:rgba(255,255,255,.12);color:#fff;border-right-color:#FFD54F}
+.sb-link .ico{font-size:17px;width:22px;text-align:center;flex-shrink:0}
+.sb-badge{margin-right:auto;background:var(--or);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:50px}
+.sb-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,.1)}
+.sb-user{display:flex;align-items:center;gap:10px}
+.sb-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-uname{font-size:13px;font-weight:700;color:#fff}
+.sb-urole{font-size:11px;color:rgba(255,255,255,.45)}
+.sb-logout{margin-right:auto;background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.6);padding:5px 10px;border-radius:7px;font-size:12px;cursor:pointer;transition:all .18s}
+.sb-logout:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* MAIN AREA */
+.cms-content{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+.topbar{
+  background:#fff;border-bottom:1px solid var(--bd);
+  padding:0 28px;height:58px;display:flex;align-items:center;
+  gap:12px;flex-shrink:0;
+  box-shadow:0 1px 8px rgba(0,0,0,.05);
+}
+.page-title{font-size:18px;font-weight:800;color:var(--tx)}
+.page-sub{font-size:13px;color:var(--gray);margin-right:10px}
+.tb-actions{margin-right:auto;display:flex;gap:8px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:9px;font-size:14px;font-weight:700;
+  border:none;cursor:pointer;transition:all .18s;
+}
+.btn-primary{background:var(--or);color:#fff;box-shadow:0 2px 10px rgba(255,87,34,.3)}
+.btn-primary:hover{background:var(--ord);transform:translateY(-1px)}
+.btn-secondary{background:#fff;color:var(--tx);border:2px solid var(--bd)}
+.btn-secondary:hover{border-color:var(--bl);color:var(--bl)}
+.btn-danger{background:#FEF2F2;color:#DC2626;border:1.5px solid #FECACA}
+.btn-danger:hover{background:#FEE2E2}
+.btn-success{background:#F0FDF4;color:#16A34A;border:1.5px solid #BBF7D0}
+.btn-sm{padding:5px 12px;font-size:13px}
+
+/* PAGE BODIES */
+.page-body{padding:28px;flex:1}
+.section{display:none}
+.section.show{display:block}
+
+/* ══ DASHBOARD ══ */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:#fff;border-radius:12px;padding:20px 22px;border:1.5px solid var(--bd);display:flex;align-items:center;gap:14px}
+.stat-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.stat-icon.blue{background:#EBF0F8}
+.stat-icon.orange{background:#FFF3E0}
+.stat-icon.green{background:#F0FDF4}
+.stat-icon.gold{background:#FFFBEB}
+.stat-num{font-size:26px;font-weight:900;color:var(--tx);line-height:1}
+.stat-label{font-size:12px;color:var(--gray);margin-top:2px}
+.dash-section-title{font-size:16px;font-weight:800;color:var(--tx);margin-bottom:14px}
+.recent-table{background:#fff;border-radius:12px;border:1.5px solid var(--bd);overflow:hidden}
+
+/* ══ TABLE ══ */
+.tbl-wrap{background:#fff;border-radius:12px;border:1.5px solid var(--bd);overflow:hidden}
+.tbl-head{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bd)}
+.tbl-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--bd);border-radius:9px;padding:7px 12px;width:220px}
+.tbl-search input{border:none;background:transparent;outline:none;font-size:14px;color:var(--tx);width:100%;direction:rtl}
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg2)}
+th{padding:11px 16px;text-align:right;font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+td{padding:12px 16px;font-size:14px;color:var(--tx);border-bottom:1px solid var(--bg2);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafbfd}
+.td-name{font-weight:700;color:var(--tx)}
+.td-city{font-size:13px;color:var(--gray)}
+.td-rating{display:flex;align-items:center;gap:5px}
+.td-stars{color:var(--gold);font-size:13px}
+.td-score{font-weight:700}
+.td-actions{display:flex;gap:6px;justify-content:flex-end}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge-vip{background:#FFFBEB;color:#92400E;border:1px solid #FDE68A}
+.badge-active{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0}
+.badge-busy{background:#FFF7ED;color:#9A3412;border:1px solid #FDBA74}
+.badge-city{background:var(--bl3);color:var(--bl);border:1px solid #C7D7F0}
+.logo-cell{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--bl),var(--bl2));color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tbl-footer{padding:14px 20px;border-top:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--gray)}
+
+/* ══ FORM ══ */
+.form-card{background:#fff;border-radius:12px;border:1.5px solid var(--bd);overflow:hidden;max-width:780px}
+.form-head{padding:18px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px}
+.form-head h3{font-size:17px;font-weight:800;color:var(--tx)}
+.form-body{padding:24px}
+.form-row{display:grid;gap:16px;margin-bottom:18px}
+.form-row.cols-2{grid-template-columns:1fr 1fr}
+.form-row.cols-3{grid-template-columns:1fr 1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.4px}
+.fg input,.fg select,.fg textarea{
+  padding:10px 12px;border:2px solid var(--bd);border-radius:9px;
+  font-size:15px;color:var(--tx);direction:rtl;outline:none;
+  transition:border-color .18s;background:#fafafa;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--bl);background:#fff}
+.fg textarea{resize:vertical;min-height:90px}
+.fg .hint{font-size:11px;color:var(--gray);margin-top:2px}
+.toggle-row{display:flex;gap:20px;flex-wrap:wrap}
+.toggle-item{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.toggle-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--or);cursor:pointer}
+.toggle-item span{font-size:14px;font-weight:600;color:var(--tx)}
+.form-actions{padding:18px 24px;border-top:1px solid var(--bd);display:flex;gap:10px;background:#fafbfd}
+
+/* ══ TOAST ══ */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1E3A5F;color:#fff;padding:12px 24px;border-radius:50px;
+  font-size:14px;font-weight:700;
+  transition:transform .3s cubic-bezier(.175,.885,.32,1.275);
+  z-index:9999;white-space:nowrap;
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.green-toast{background:#16A34A}
+.toast.red-toast{background:#DC2626}
+
+/* ══ EMPTY STATE ══ */
+.empty-state{text-align:center;padding:60px 20px;color:var(--gray)}
+.empty-state .es-icon{font-size:48px;margin-bottom:12px}
+.empty-state h3{font-size:17px;font-weight:700;color:var(--tx);margin-bottom:6px}
+
+/* DELETE CONFIRM */
+.confirm-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:8000;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.confirm-overlay.open{display:flex}
+.confirm-box{background:#fff;border-radius:16px;padding:28px 30px;max-width:380px;width:100%;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.confirm-icon{font-size:44px;margin-bottom:12px}
+.confirm-box h3{font-size:18px;font-weight:800;color:var(--tx);margin-bottom:8px}
+.confirm-box p{font-size:14px;color:var(--gray);margin-bottom:22px;line-height:1.6}
+.confirm-btns{display:flex;gap:10px;justify-content:center}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:768px){
+  .sidebar{display:none}
+  .topbar{padding:0 16px}
+  .page-body{padding:16px}
+  .form-row.cols-2,.form-row.cols-3{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  th:nth-child(3),td:nth-child(3),
+  th:nth-child(4),td:nth-child(4){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">להובלה <span>בקליק</span></div>
+    <div class="login-sub">ממשק ניהול מובילים</div>
+    <div class="lf-group">
+      <label>שם משתמש</label>
+      <input type="text" id="l-user" placeholder="admin" autocomplete="username">
+    </div>
+    <div class="lf-group">
+      <label>סיסמה</label>
+      <input type="password" id="l-pass" placeholder="••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">כניסה לניהול</button>
+    <div class="login-err" id="login-err">שם משתמש או סיסמה שגויים</div>
+  </div>
+</div>
+
+<!-- ══ CMS MAIN ══ -->
+<div id="cms-main">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-text">להובלה <span>בקליק</span></div>
+      <div class="sb-logo-sub">ניהול מובילים</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">ראשי</div>
+      <div class="sb-link on" onclick="goto('dashboard',this)" id="nav-dashboard">
+        <span class="ico">📊</span> דשבורד
+      </div>
+      <div class="sb-section">מובילים</div>
+      <div class="sb-link" onclick="goto('list',this)" id="nav-list">
+        <span class="ico">📋</span> רשימת מובילים
+        <span class="sb-badge" id="sb-count">0</span>
+      </div>
+      <div class="sb-link" onclick="goto('add',this)" id="nav-add">
+        <span class="ico">➕</span> הוסף מוביל
+      </div>
+      <div class="sb-section">אתר</div>
+      <div class="sb-link" onclick="window.open('/subscriber','_blank')">
+        <span class="ico">🌐</span> צפה באתר ←
+      </div>
+    </nav>
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-avatar">A</div>
+        <div>
+          <div class="sb-uname">admin</div>
+          <div class="sb-urole">מנהל מערכת</div>
+        </div>
+        <button class="sb-logout" onclick="logout()">יציאה</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="cms-content">
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="page-title" id="tb-title">דשבורד</div>
+      <div class="page-sub" id="tb-sub"></div>
+      <div class="tb-actions" id="tb-actions"></div>
+    </div>
+
+    <div class="page-body">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="section show" id="sec-dashboard">
+        <div class="stat-grid" id="stat-grid"></div>
+        <div class="dash-section-title">מובילים אחרונים שנוספו</div>
+        <div class="recent-table">
+          <table>
+            <thead><tr>
+              <th></th><th>שם חברה</th><th>עיר</th><th>דירוג</th><th>סטטוס</th>
+            </tr></thead>
+            <tbody id="recent-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── LIST ── -->
+      <div class="section" id="sec-list">
+        <div class="tbl-wrap">
+          <div class="tbl-head">
+            <div class="tbl-search">
+              <span>🔍</span>
+              <input type="text" placeholder="חיפוש לפי שם..." oninput="searchMovers(this.value)">
+            </div>
+            <button class="btn btn-primary" onclick="goto('add',document.getElementById('nav-add'))">
+              ➕ הוסף מוביל חדש
+            </button>
+          </div>
+          <table>
+            <thead><tr>
+              <th></th>
+              <th>שם חברה</th>
+              <th>עיר</th>
+              <th>דירוג</th>
+              <th>VIP</th>
+              <th>סטטוס</th>
+              <th style="text-align:left">פעולות</th>
+            </tr></thead>
+            <tbody id="list-tbody"></tbody>
+          </table>
+          <div class="tbl-footer">
+            <span id="tbl-count"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ADD / EDIT FORM ── -->
+      <div class="section" id="sec-form">
+        <div class="form-card">
+          <div class="form-head">
+            <span id="form-icon">➕</span>
+            <h3 id="form-title">הוסף מוביל חדש</h3>
+          </div>
+          <div class="form-body">
+            <input type="hidden" id="f-id">
+
+            <div class="form-row cols-2">
+              <div class="fg">
+                <label>שם החברה *</label>
+                <input type="text" id="f-name" placeholder="הובלות כהן ובניו">
+              </div>
+              <div class="fg">
+                <label>ראשי תיבות (לוגו)</label>
+                <input type="text" id="f-initials" placeholder="כ.ב" maxlength="4">
+                <div class="hint">2-3 תווים שיופיעו בלוגו</div>
+              </div>
+            </div>
+
+            <div class="form-row cols-2">
+              <div class="fg">
+                <label>עיר / אזור *</label>
+                <select id="f-city">
+                  <option value="tel-aviv">תל אביב והמרכז</option>
+                  <option value="jerusalem">ירושלים והסביבה</option>
+                  <option value="haifa">חיפה והצפון</option>
+                  <option value="rishon">ראשון לציון / רחובות</option>
+                  <option value="beer-sheva">באר שבע והדרום</option>
+                  <option value="netanya">נתניה / חדרה</option>
+                  <option value="petah-tikva">פתח תקווה / בני ברק</option>
+                  <option value="ashdod">אשדוד / אשקלון</option>
+                </select>
+              </div>
+              <div class="fg">
+                <label>תיאור אזור פעילות *</label>
+                <input type="text" id="f-citylabel" placeholder="תל אביב, גוש דן, רמת גן">
+              </div>
+            </div>
+
+            <div class="form-row cols-2">
+              <div class="fg">
+                <label>טלפון *</label>
+                <input type="tel" id="f-phone" placeholder="052-111-2233" dir="ltr">
+              </div>
+              <div class="fg">
+                <label>וואטסאפ (מספר בלבד, ללא +)</label>
+                <input type="text" id="f-wa" placeholder="972521112233" dir="ltr">
+                <div class="hint">לדוגמה: 972521112233</div>
+              </div>
+            </div>
+
+            <div class="form-row cols-3">
+              <div class="fg">
+                <label>דירוג (1–5)</label>
+                <input type="number" id="f-rating" placeholder="4.8" min="1" max="5" step="0.1">
+              </div>
+              <div class="fg">
+                <label>מספר ביקורות</label>
+                <input type="number" id="f-reviews" placeholder="87" min="0">
+              </div>
+              <div class="fg">
+                <label>קישור לתמונה (URL)</label>
+                <input type="text" id="f-img" placeholder="https://..." dir="ltr">
+                <div class="hint">השאר ריק לתמונה ברירת מחדל</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label>תיאור החברה *</label>
+                <textarea id="f-desc" placeholder="תיאור קצר שיופיע בכרטיס המוביל..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label>תגיות שירות (מופרדות בפסיק)</label>
+                <input type="text" id="f-tags" placeholder="הובלת דירה, אריזה, פירוק והרכבה">
+                <div class="hint">לדוגמה: הובלת דירה, הובלת משרד, אריזה</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="toggle-row">
+                <label class="toggle-item">
+                  <input type="checkbox" id="f-featured">
+                  <span>⭐ VIP (מובלט בראש)</span>
+                </label>
+                <label class="toggle-item">
+                  <input type="checkbox" id="f-available" checked>
+                  <span>🟢 זמין לתיאום</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveMover()">💾 שמור מוביל</button>
+            <button class="btn btn-secondary" onclick="goto('list',document.getElementById('nav-list'))">ביטול</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- page-body -->
+  </div><!-- cms-content -->
+
+</div><!-- cms-main -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- DELETE CONFIRM -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <h3>מחיקת מוביל</h3>
+    <p id="confirm-text">האם אתה בטוח שברצונך למחוק את המוביל?<br>פעולה זו לא ניתנת לביטול.</p>
+    <div class="confirm-btns">
+      <button class="btn btn-danger" id="confirm-yes">כן, מחק</button>
+      <button class="btn btn-secondary" onclick="closeConfirm()">ביטול</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══ DEFAULT MOVERS DATA ══
+const DEFAULT_MOVERS = [
+  {id:1,name:'הובלות כהן ובניו',initials:'כ.ב',city:'tel-aviv',cityLabel:'תל אביב, גוש דן',rating:4.9,reviews:124,featured:true,phone:'052-111-2233',wa:'972521112233',available:true,desc:'חברת הובלות ותיקה עם 15 שנות ניסיון. מתמחים בהובלות דירה ומשרד בגוש דן. צוות מקצועי, ביטוח מלא, מחיר שקוף.',tags:['הובלת דירה','אריזה','פירוק והרכבה'],img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop'},
+  {id:2,name:'מובילי צפון פרמיום',initials:'צ.פ',city:'haifa',cityLabel:'חיפה, קריות, עכו',rating:4.8,reviews:87,featured:true,phone:'054-222-3344',wa:'972542223344',available:true,desc:'המובילים המומלצים בחיפה. 12 שנות ניסיון, 3 משאיות, מגיעים לכל הצפון. ביקורות מדהימות בגוגל.',tags:['הובלת דירה','הובלת משרד','פינוי'],img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop'},
+  {id:3,name:'ירושלים אקספרס הובלות',initials:'י.א',city:'jerusalem',cityLabel:'ירושלים, בית שמש, מודיעין',rating:4.7,reviews:96,featured:false,phone:'053-333-4455',wa:'972533334455',available:true,desc:'מובילים מקצועיים בירושלים ואיזור. מתמחים בהובלות בשכונות צפופות ובבניינים ללא מעלית. תמחור הוגן.',tags:['הובלת דירה','בניינים ישנים','ירושלים'],img:'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=700&q=75&fit=crop'},
+  {id:4,name:'אקספרס הובלות ראשון',initials:'א.ר',city:'rishon',cityLabel:'ראשון לציון, רחובות, נס ציונה',rating:4.9,reviews:53,featured:true,phone:'058-444-5566',wa:'972584445566',available:true,desc:'הכי מהירים בראשון לציון. עונים בשניות, מגיעים תוך 24 שעות. מחיר תחרותי ושירות ברמה גבוהה.',tags:['מהיר','הובלת דירה','הובלת משרד'],img:'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=700&q=75&fit=crop'},
+  {id:5,name:'הובלות הנגב',initials:'ה.נ',city:'beer-sheva',cityLabel:'באר שבע, דימונה, ערד',rating:4.6,reviews:41,featured:false,phone:'050-555-6677',wa:'972505556677',available:false,desc:'הובלות איכותיות בדרום הארץ. מכירים כל פינה בבאר שבע. מחירים משתלמים, עבודה נקייה ומקצועית.',tags:['הובלת דירה','אריזה','דרום הארץ'],img:'https://images.unsplash.com/photo-1530685932526-48ec92998eaa?w=700&q=75&fit=crop'},
+  {id:6,name:'מרכז הובלות גוש דן',initials:'מ.ג',city:'tel-aviv',cityLabel:'רמת גן, גבעתיים, בני ברק',rating:4.8,reviews:78,featured:false,phone:'052-666-7788',wa:'972526667788',available:true,desc:'מובילים מהמרכז לכל הארץ. מתמחים בהובלות ארציות ובמשרדים גדולים. 8 שנות ניסיון בגוש דן.',tags:['הובלה ארצית','הובלת משרד','פירוק והרכבה'],img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=75&fit=crop'},
+  {id:7,name:'פריסמה הובלות',initials:'פ.ה',city:'petah-tikva',cityLabel:'פתח תקווה, אור יהודה, קריית אונו',rating:4.7,reviews:62,featured:false,phone:'054-777-8899',wa:'972547778899',available:true,desc:'הובלות ואחסון בפתח תקווה והסביבה. יש לנו מחסן לאחסון ריהוט בין הובלות. שירות מקיף ואמין.',tags:['הובלה ואחסון','הובלת דירה','פתח תקווה'],img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=75&fit=crop'},
+  {id:8,name:'הובלות ים תיכוני',initials:'י.ת',city:'netanya',cityLabel:'נתניה, חדרה, כפר סבא',rating:4.8,reviews:45,featured:false,phone:'055-888-9900',wa:'972558889900',available:true,desc:'נתניה וסביבה — אנחנו המובילים שכולם ממליצים עליהם. 10 שנות ניסיון, ביטוח מלא, מחיר שמשתלם.',tags:['הובלת דירה','אריזה','נתניה'],img:'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=700&q=75&fit=crop'},
+  {id:9,name:'אשדוד הובלות מקצועי',initials:'א.מ',city:'ashdod',cityLabel:'אשדוד, אשקלון, קריית גת',rating:4.7,reviews:38,featured:false,phone:'057-999-0011',wa:'972579990011',available:true,desc:'המובילים הכי טובים בדרום המרכז. עונים 24/7, מגיעים גם בסוף שבוע. ללא הפתעות במחיר.',tags:['זמינות 24/7','הובלת דירה','דרום מרכז'],img:'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop&crop=right'},
+  {id:10,name:'כרמל הובלות והסעות',initials:'כ.ה',city:'haifa',cityLabel:'חיפה, טירת כרמל, זכרון יעקב',rating:4.9,reviews:29,featured:false,phone:'050-112-2334',wa:'972501122334',available:true,desc:'הובלות בכרמל ובצפון. מכירים כל רחוב בחיפה. גישה לשכונות קשות, מחירים הוגנים.',tags:['הובלת דירה','חיפה','שכונות קשות'],img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop&crop=right'}
+];
+
+const CITY_LABELS = {
+  'tel-aviv':'תל אביב','jerusalem':'ירושלים','haifa':'חיפה',
+  'rishon':'ראשון לציון','beer-sheva':'באר שבע','netanya':'נתניה',
+  'petah-tikva':'פתח תקווה','ashdod':'אשדוד'
+};
+
+// ══ STORAGE ══
+function loadMovers(){
+  const d = localStorage.getItem('hovala_movers');
+  if(d){ try{ return JSON.parse(d); }catch(e){} }
+  saveMovers(DEFAULT_MOVERS);
+  return DEFAULT_MOVERS;
+}
+function saveMovers(arr){
+  localStorage.setItem('hovala_movers', JSON.stringify(arr));
+}
+function nextId(arr){
+  return arr.length ? Math.max(...arr.map(m=>m.id)) + 1 : 1;
+}
+
+// ══ AUTH ══
+function doLogin(){
+  const u = document.getElementById('l-user').value.trim();
+  const p = document.getElementById('l-pass').value.trim();
+  if(u==='admin' && p==='admin'){
+    sessionStorage.setItem('cms_auth','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('cms-main').classList.add('show');
+    initCMS();
+  } else {
+    const err = document.getElementById('login-err');
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none', 3000);
+  }
+}
+function logout(){
+  sessionStorage.removeItem('cms_auth');
+  location.reload();
+}
+
+// ══ NAVIGATION ══
+function goto(sec, navEl){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.querySelectorAll('.sb-link').forEach(n=>n.classList.remove('on'));
+  document.getElementById('sec-'+sec).classList.add('show');
+  if(navEl) navEl.classList.add('on');
+
+  const titles = {dashboard:'דשבורד',list:'רשימת מובילים',form:'',add:'הוסף מוביל חדש'};
+  document.getElementById('tb-title').textContent = titles[sec] || '';
+  document.getElementById('tb-sub').textContent = '';
+  document.getElementById('tb-actions').innerHTML = '';
+
+  if(sec==='dashboard') renderDashboard();
+  if(sec==='list') renderList();
+  if(sec==='add'){
+    clearForm();
+    document.getElementById('form-title').textContent = 'הוסף מוביל חדש';
+    document.getElementById('form-icon').textContent = '➕';
+    document.getElementById('tb-title').textContent = 'הוסף מוביל חדש';
+  }
+}
+
+// ══ DASHBOARD ══
+function renderDashboard(){
+  const movers = loadMovers();
+  const vip = movers.filter(m=>m.featured).length;
+  const avail = movers.filter(m=>m.available).length;
+  const cities = new Set(movers.map(m=>m.city)).size;
+
+  document.getElementById('stat-grid').innerHTML = `
+    <div class="stat-card"><div class="stat-icon blue">🚛</div><div><div class="stat-num">${movers.length}</div><div class="stat-label">סה"כ מובילים</div></div></div>
+    <div class="stat-card"><div class="stat-icon gold">⭐</div><div><div class="stat-num">${vip}</div><div class="stat-label">מובילי VIP</div></div></div>
+    <div class="stat-card"><div class="stat-icon green">🟢</div><div><div class="stat-num">${avail}</div><div class="stat-label">זמינים עכשיו</div></div></div>
+    <div class="stat-card"><div class="stat-icon orange">📍</div><div><div class="stat-num">${cities}</div><div class="stat-label">ערים מכוסות</div></div></div>
+  `;
+
+  const recent = [...movers].reverse().slice(0,5);
+  document.getElementById('recent-tbody').innerHTML = recent.map(m=>`
+    <tr>
+      <td><div class="logo-cell">${m.initials}</div></td>
+      <td><div class="td-name">${m.name}</div></td>
+      <td><span class="badge badge-city">${CITY_LABELS[m.city]||m.city}</span></td>
+      <td><div class="td-rating"><span class="td-stars">★</span><span class="td-score">${m.rating}</span></div></td>
+      <td>${m.available?'<span class="badge badge-active">🟢 זמין</span>':'<span class="badge badge-busy">🟡 עסוק</span>'}</td>
+    </tr>`).join('');
+}
+
+// ══ LIST ══
+let searchQ = '';
+function renderList(query){
+  if(query !== undefined) searchQ = query;
+  const movers = loadMovers();
+  const filtered = movers.filter(m=>!searchQ || m.name.includes(searchQ) || (m.cityLabel||'').includes(searchQ));
+
+  document.getElementById('tbl-count').textContent = `מציג ${filtered.length} מתוך ${movers.length} מובילים`;
+  document.getElementById('sb-count').textContent = movers.length;
+
+  if(!filtered.length){
+    document.getElementById('list-tbody').innerHTML = `<tr><td colspan="7"><div class="empty-state"><div class="es-icon">🔍</div><h3>לא נמצאו תוצאות</h3></div></td></tr>`;
+    return;
+  }
+
+  document.getElementById('list-tbody').innerHTML = filtered.map(m=>`
+    <tr>
+      <td><div class="logo-cell">${m.initials}</div></td>
+      <td>
+        <div class="td-name">${m.name}</div>
+        <div class="td-city">${m.cityLabel}</div>
+      </td>
+      <td><span class="badge badge-city">${CITY_LABELS[m.city]||m.city}</span></td>
+      <td><div class="td-rating"><span class="td-stars">★</span><span class="td-score">${m.rating}</span><span style="font-size:12px;color:#9CA3AF">(${m.reviews})</span></div></td>
+      <td>${m.featured?'<span class="badge badge-vip">⭐ VIP</span>':'<span style="color:#D1D5DB">—</span>'}</td>
+      <td>${m.available?'<span class="badge badge-active">🟢 זמין</span>':'<span class="badge badge-busy">🟡 עסוק</span>'}</td>
+      <td>
+        <div class="td-actions">
+          <button class="btn btn-secondary btn-sm" onclick="editMover(${m.id})">✏️ עריכה</button>
+          <button class="btn btn-danger btn-sm" onclick="confirmDelete(${m.id},'${m.name.replace(/'/g,"\\'")}')">🗑️</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+function searchMovers(q){ renderList(q); }
+
+// ══ ADD / EDIT ══
+function clearForm(){
+  ['f-id','f-name','f-initials','f-citylabel','f-phone','f-wa','f-rating','f-reviews','f-img','f-desc','f-tags'].forEach(id=>{
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-city').value = 'tel-aviv';
+  document.getElementById('f-featured').checked = false;
+  document.getElementById('f-available').checked = true;
+}
+
+function editMover(id){
+  const m = loadMovers().find(x=>x.id===id);
+  if(!m) return;
+  clearForm();
+  document.getElementById('f-id').value = m.id;
+  document.getElementById('f-name').value = m.name;
+  document.getElementById('f-initials').value = m.initials;
+  document.getElementById('f-city').value = m.city;
+  document.getElementById('f-citylabel').value = m.cityLabel;
+  document.getElementById('f-phone').value = m.phone;
+  document.getElementById('f-wa').value = m.wa;
+  document.getElementById('f-rating').value = m.rating;
+  document.getElementById('f-reviews').value = m.reviews;
+  document.getElementById('f-img').value = m.img||'';
+  document.getElementById('f-desc').value = m.desc;
+  document.getElementById('f-tags').value = (m.tags||[]).join(', ');
+  document.getElementById('f-featured').checked = !!m.featured;
+  document.getElementById('f-available').checked = !!m.available;
+
+  document.getElementById('form-title').textContent = 'עריכת מוביל: ' + m.name;
+  document.getElementById('form-icon').textContent = '✏️';
+  document.getElementById('tb-title').textContent = 'עריכת מוביל';
+
+  goto('form', null);
+  document.querySelectorAll('.sb-link').forEach(n=>n.classList.remove('on'));
+}
+
+function saveMover(){
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+
+  if(!name){ showToast('⚠️ יש למלא שם חברה', 'red'); document.getElementById('f-name').focus(); return; }
+  if(!phone){ showToast('⚠️ יש למלא טלפון', 'red'); document.getElementById('f-phone').focus(); return; }
+  if(!desc){ showToast('⚠️ יש למלא תיאור', 'red'); document.getElementById('f-desc').focus(); return; }
+
+  const movers = loadMovers();
+  const existingId = parseInt(document.getElementById('f-id').value)||0;
+  const rawTags = document.getElementById('f-tags').value;
+  const tags = rawTags ? rawTags.split(',').map(t=>t.trim()).filter(Boolean) : [];
+  const nameVal = document.getElementById('f-name').value.trim();
+  const initialsVal = document.getElementById('f-initials').value.trim() || nameVal.slice(0,2);
+
+  const DEFAULTS_IMGS = [
+    'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=700&q=75&fit=crop',
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=75&fit=crop',
+    'https://images.unsplash.com/photo-1600518464441-9154a4dea21b?w=700&q=75&fit=crop',
+  ];
+
+  const mover = {
+    id: existingId || nextId(movers),
+    name: nameVal,
+    initials: initialsVal,
+    city: document.getElementById('f-city').value,
+    cityLabel: document.getElementById('f-citylabel').value.trim(),
+    rating: parseFloat(document.getElementById('f-rating').value)||4.8,
+    reviews: parseInt(document.getElementById('f-reviews').value)||0,
+    featured: document.getElementById('f-featured').checked,
+    phone: phone,
+    wa: document.getElementById('f-wa').value.trim(),
+    available: document.getElementById('f-available').checked,
+    desc: desc,
+    tags: tags,
+    img: document.getElementById('f-img').value.trim() || DEFAULTS_IMGS[Math.floor(Math.random()*DEFAULTS_IMGS.length)]
+  };
+
+  if(existingId){
+    const idx = movers.findIndex(m=>m.id===existingId);
+    if(idx>-1) movers[idx]=mover;
+  } else {
+    movers.push(mover);
+  }
+
+  saveMovers(movers);
+  showToast('✅ ' + (existingId ? 'המוביל עודכן בהצלחה' : 'מוביל חדש נוסף בהצלחה'), 'green');
+  setTimeout(()=>goto('list', document.getElementById('nav-list')), 800);
+}
+
+// ══ DELETE ══
+let deleteId = null;
+function confirmDelete(id, name){
+  deleteId = id;
+  document.getElementById('confirm-text').innerHTML = `האם אתה בטוח שברצונך למחוק את<br><strong>${name}</strong>?<br><small style="color:#9CA3AF">פעולה זו לא ניתנת לביטול.</small>`;
+  document.getElementById('confirm-overlay').classList.add('open');
+  document.getElementById('confirm-yes').onclick = function(){ doDelete(); };
+}
+function doDelete(){
+  if(!deleteId) return;
+  const movers = loadMovers().filter(m=>m.id!==deleteId);
+  saveMovers(movers);
+  closeConfirm();
+  showToast('🗑️ המוביל נמחק', 'red');
+  renderList();
+  renderDashboard();
+}
+function closeConfirm(){
+  document.getElementById('confirm-overlay').classList.remove('open');
+  deleteId = null;
+}
+document.getElementById('confirm-overlay').addEventListener('click', e=>{
+  if(e.target===e.currentTarget) closeConfirm();
+});
+
+// ══ TOAST ══
+let toastTimer;
+function showToast(msg, type=''){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type==='green'?' green-toast':type==='red'?' red-toast':'');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// ══ INIT ══
+function initCMS(){
+  const movers = loadMovers();
+  document.getElementById('sb-count').textContent = movers.length;
+  renderDashboard();
+}
+
+// ══ BOOT ══
+if(sessionStorage.getItem('cms_auth')==='1'){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('cms-main').classList.add('show');
+  initCMS();
+}
+document.getElementById('l-user').focus();
+</script>
+</body>
+</html>

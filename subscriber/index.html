@@ -562,7 +562,7 @@ footer{background:#0D1B2A;padding:32px 24px}
 </div>
 
 <script>
-const MOVERS = [
+const DEFAULT_MOVERS = [
   {
     id:1, name:'הובלות כהן ובניו', initials:'כ.ב',
     city:'tel-aviv', cityLabel:'תל אביב, גוש דן',
@@ -665,6 +665,13 @@ const MOVERS = [
   }
 ];
 
+function loadMovers(){
+  const d = localStorage.getItem('hovala_movers');
+  if(d){ try{ return JSON.parse(d); }catch(e){} }
+  localStorage.setItem('hovala_movers', JSON.stringify(DEFAULT_MOVERS));
+  return DEFAULT_MOVERS;
+}
+
 let currentFilter = 'all';
 let currentSort = 'featured';
 
@@ -721,7 +728,7 @@ function renderCard(m){
 }
 
 function getFiltered(){
-  return MOVERS.filter(m => currentFilter === 'all' || m.city === currentFilter);
+  return loadMovers().filter(m => currentFilter === 'all' || m.city === currentFilter);
 }
 
 function getSorted(arr){
@@ -776,7 +783,7 @@ function sortMovers(){
 }
 
 function openModal(id){
-  const m = MOVERS.find(x => x.id === id);
+  const m = loadMovers().find(x => x.id === id);
   if(!m) return;
   document.getElementById('modal-title').textContent = m.name;
   document.getElementById('modal-logo').textContent = m.initials;
