@@ -667,7 +667,8 @@ function logout(){
 function goto(sec, navEl){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
   document.querySelectorAll('.sb-link').forEach(n=>n.classList.remove('on'));
-  document.getElementById('sec-'+sec).classList.add('show');
+  const sectionEl = document.getElementById('sec-'+(sec==='add'?'form':sec));
+  if(sectionEl) sectionEl.classList.add('show');
   if(navEl) navEl.classList.add('on');
 
   const titles = {dashboard:'דשבורד',list:'רשימת מובילים',form:'',add:'הוסף מוביל חדש'};
