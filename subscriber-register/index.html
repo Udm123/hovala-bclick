@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הצטרף כמוביל | להובלה בקליק</title>
+<meta name="description" content="הצטרף למאגר המובילים הגדול בישראל. קבל לקוחות חדשים כל חודש ב-₪299 בלבד.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bl:#1E3A5F;--bl2:#2A5298;
+  --or:#FF5722;--ord:#E64A19;--orbg:#FFF3E0;
+  --gr:#25D366;
+  --gold:#FBBC05;
+  --bg:#F4F6FA;--bd:#DDE2EC;--gray:#6B7280;--tx:#111827;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Assistant',sans-serif;direction:rtl;background:var(--bg);color:var(--tx);font-size:16px;line-height:1.5;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* TOPBAR */
+.topbar{background:var(--bl);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.logo{font-size:20px;font-weight:900;color:#fff}
+.logo span{color:#FFD54F}
+.top-back{font-size:13px;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:6px;transition:color .18s}
+.top-back:hover{color:#fff}
+
+/* HERO STRIP */
+.hero-strip{
+  background:linear-gradient(135deg,var(--bl) 0%,#2A5298 100%);
+  padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.hero-strip::before{content:'🚛';position:absolute;left:-20px;bottom:-30px;font-size:160px;opacity:.06;transform:scaleX(-1)}
+.hs-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);padding:6px 18px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:16px}
+.hs-h{font-size:clamp(24px,4vw,42px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:10px}
+.hs-h em{color:#FFD54F;font-style:normal;display:block}
+.hs-sub{font-size:16px;color:rgba(255,255,255,.78);max-width:480px;margin:0 auto 28px}
+.hs-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hs-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.88);padding:7px 16px;border-radius:50px;font-size:13px;font-weight:600}
+
+/* MAIN LAYOUT */
+.main{max-width:1060px;margin:0 auto;padding:40px 20px 60px;display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+
+/* BENEFITS PANEL */
+.benefits{background:#fff;border-radius:16px;border:1.5px solid var(--bd);overflow:hidden;position:sticky;top:20px}
+.ben-head{background:linear-gradient(135deg,var(--bl),var(--bl2));padding:22px 22px 18px}
+.ben-h{font-size:18px;font-weight:900;color:#fff;margin-bottom:4px}
+.ben-sub{font-size:13px;color:rgba(255,255,255,.65)}
+.ben-price{display:flex;align-items:baseline;gap:6px;margin-top:14px}
+.ben-num{font-size:44px;font-weight:900;color:#FFD54F;line-height:1}
+.ben-per{font-size:14px;color:rgba(255,255,255,.6);font-weight:600}
+.ben-body{padding:20px 22px}
+.ben-item{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--bg);font-size:14px}
+.ben-item:last-child{border-bottom:none}
+.ben-ic{font-size:18px;flex-shrink:0;margin-top:1px}
+.ben-text strong{display:block;font-weight:700;color:var(--tx)}
+.ben-text span{font-size:12px;color:var(--gray)}
+.ben-cta{margin:18px 22px 22px;background:var(--or);color:#fff;border:none;width:100%;padding:13px;border-radius:11px;font-family:'Assistant',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 3px 14px rgba(255,87,34,.3)}
+.ben-cta:hover{background:var(--ord);transform:translateY(-1px)}
+.ben-note{text-align:center;font-size:12px;color:var(--gray);padding-bottom:16px}
+
+/* FORM CARD */
+.form-card{background:#fff;border-radius:16px;border:1.5px solid var(--bd);overflow:hidden}
+.fc-head{padding:22px 24px 18px;border-bottom:1px solid var(--bd)}
+.fc-head h2{font-size:20px;font-weight:800;color:var(--tx);margin-bottom:3px}
+.fc-head p{font-size:13px;color:var(--gray)}
+.step-bar{display:flex;gap:0;margin-top:16px}
+.step{flex:1;text-align:center;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(-50% + 14px);right:calc(50% + 14px);height:2px;background:var(--bd);z-index:0}
+.step.done::after{background:var(--or)}
+.step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--bd);background:#fff;color:var(--gray);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;position:relative;z-index:1;transition:all .3s}
+.step.active .step-dot{border-color:var(--or);background:var(--or);color:#fff}
+.step.done .step-dot{border-color:var(--or);background:var(--or);color:#fff}
+.step-label{font-size:11px;font-weight:600;color:var(--gray)}
+.step.active .step-label{color:var(--or)}
+.step.done .step-label{color:var(--or)}
+
+.fc-body{padding:24px}
+
+/* FORM STEPS */
+.fstep{display:none}
+.fstep.show{display:block}
+
+.form-row{display:grid;gap:14px;margin-bottom:16px}
+.form-row.c2{grid-template-columns:1fr 1fr}
+@media(max-width:600px){.form-row.c2{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:12px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.4px}
+.fg label .req{color:var(--or)}
+.fg input,.fg select,.fg textarea{
+  padding:11px 13px;border:2px solid var(--bd);border-radius:10px;
+  font-family:'Assistant',sans-serif;font-size:15px;color:var(--tx);direction:rtl;outline:none;
+  transition:border-color .18s,box-shadow .18s;background:#fafafa;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--bl);background:#fff;box-shadow:0 0 0 3px rgba(30,58,95,.08)}
+.fg textarea{resize:vertical;min-height:100px}
+.fg .hint{font-size:11px;color:var(--gray);margin-top:2px}
+.fg .err-msg{font-size:12px;color:#DC2626;display:none;margin-top:3px}
+.fg.invalid input,.fg.invalid select,.fg.invalid textarea{border-color:#EF4444}
+.fg.invalid .err-msg{display:block}
+
+/* Photo preview in form */
+.photo-wrap{display:flex;align-items:center;gap:14px}
+.photo-wrap input{flex:1}
+.photo-prev{width:52px;height:52px;border-radius:12px;background:#EBF0F8;border:2px solid var(--bd);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--gray)}
+.photo-prev img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Tags checkboxes */
+.tags-grid{display:flex;flex-wrap:wrap;gap:8px}
+.tag-cb{cursor:pointer;user-select:none}
+.tag-cb input{display:none}
+.tag-cb span{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:50px;border:2px solid var(--bd);font-size:13px;font-weight:600;color:var(--gray);transition:all .18s}
+.tag-cb input:checked + span{background:var(--bl);border-color:var(--bl);color:#fff}
+.tag-cb span:hover{border-color:var(--bl);color:var(--bl)}
+
+/* Step actions */
+.step-actions{display:flex;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid var(--bd)}
+.btn-next{flex:1;background:var(--or);color:#fff;border:none;padding:13px;border-radius:11px;font-family:'Assistant',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:all .2s;box-shadow:0 3px 14px rgba(255,87,34,.25)}
+.btn-next:hover{background:var(--ord);transform:translateY(-1px)}
+.btn-back{background:#fff;color:var(--gray);border:2px solid var(--bd);padding:13px 20px;border-radius:11px;font-family:'Assistant',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-back:hover{border-color:var(--bl);color:var(--bl)}
+
+/* Preview card in step 3 */
+.preview-card{border:2px solid var(--bd);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.pc-banner{height:100px;background:linear-gradient(135deg,var(--bl),var(--bl2));position:relative;overflow:hidden}
+.pc-banner img{width:100%;height:100%;object-fit:cover}
+.pc-verified{position:absolute;top:8px;left:8px;background:#fff;color:#166534;font-size:11px;font-weight:800;padding:3px 9px;border-radius:50px}
+.pc-body{padding:14px 16px}
+.pc-top{display:flex;align-items:center;gap:11px;margin-bottom:10px}
+.pc-logo{width:46px;height:46px;border-radius:11px;overflow:hidden;background:linear-gradient(135deg,var(--bl),var(--bl2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;font-weight:900;flex-shrink:0}
+.pc-logo img{width:100%;height:100%;object-fit:cover}
+.pc-name{font-size:16px;font-weight:800;color:var(--tx)}
+.pc-area{font-size:12px;color:var(--gray);margin-top:1px}
+.pc-stars{color:var(--gold);font-size:12px;margin-top:2px}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.pc-tag{background:#EBF0F8;color:var(--bl);font-size:11px;font-weight:700;padding:3px 10px;border-radius:50px}
+.pc-desc{font-size:12px;color:var(--gray);line-height:1.6}
+.pc-phone{background:var(--or);color:#fff;border:none;width:100%;padding:11px;border-radius:10px;font-family:'Assistant',sans-serif;font-size:15px;font-weight:800;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:7px}
+
+/* SUCCESS */
+#success-screen{display:none;text-align:center;padding:40px 24px}
+.suc-icon{font-size:64px;animation:popIn .5s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.suc-h{font-size:24px;font-weight:900;color:var(--tx);margin:14px 0 8px}
+.suc-p{font-size:15px;color:var(--gray);line-height:1.7;max-width:380px;margin:0 auto 24px}
+.suc-box{background:var(--bg);border-radius:12px;padding:16px;text-align:right;font-size:14px;line-height:2;margin-bottom:20px;border:1.5px solid var(--bd)}
+.suc-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.suc-btn1{background:var(--or);color:#fff;padding:13px 28px;border-radius:11px;font-family:'Assistant',sans-serif;font-size:15px;font-weight:800;border:none;cursor:pointer;transition:all .2s}
+.suc-btn1:hover{background:var(--ord)}
+.suc-btn2{background:#fff;color:var(--bl);border:2px solid var(--bl);padding:13px 24px;border-radius:11px;font-family:'Assistant',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.suc-btn2:hover{background:var(--bl);color:#fff}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">להובלה <span>בקליק</span></div>
+  <a href="/subscriber" class="top-back">← חזרה לאתר</a>
+</div>
+
+<div class="hero-strip">
+  <div class="hs-tag">🚛 הצטרפות למאגר המובילים</div>
+  <h1 class="hs-h">קבל לקוחות חדשים כל חודש<em>ב-₪299 בלבד</em></h1>
+  <p class="hs-sub">מלא פרטים אחד, ולקוחות יתקשרו ישירות אליך. ללא עמלות, ללא התחייבות.</p>
+  <div class="hs-pills">
+    <div class="hs-pill">✅ פרופיל מלא עם טלפון</div>
+    <div class="hs-pill">📞 שיחות ישירות אליך</div>
+    <div class="hs-pill">🔓 ביטול חופשי</div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- FORM CARD -->
+  <div class="form-card">
+    <div class="fc-head">
+      <h2>הרשמה למאגר המובילים</h2>
+      <p>3 שלבים פשוטים — פחות מ-5 דקות</p>
+      <div class="step-bar">
+        <div class="step active" id="stp1"><div class="step-dot">1</div><div class="step-label">פרטי העסק</div></div>
+        <div class="step" id="stp2"><div class="step-dot">2</div><div class="step-label">תיאור ושירותים</div></div>
+        <div class="step" id="stp3"><div class="step-dot">3</div><div class="step-label">אישור ושליחה</div></div>
+      </div>
+    </div>
+    <div class="fc-body">
+
+      <!-- STEP 1 -->
+      <div class="fstep show" id="step1">
+        <div class="form-row c2">
+          <div class="fg" id="fg-name">
+            <label>שם החברה <span class="req">*</span></label>
+            <input type="text" id="f-name" placeholder="הובלות כהן ובניו">
+            <div class="err-msg">יש למלא שם חברה</div>
+          </div>
+          <div class="fg" id="fg-initials">
+            <label>ראשי תיבות</label>
+            <input type="text" id="f-initials" placeholder="כ.ב" maxlength="4">
+            <div class="hint">2-3 תווים — מופיעים בלוגו אם אין תמונה</div>
+          </div>
+        </div>
+
+        <div class="form-row c2">
+          <div class="fg" id="fg-city">
+            <label>עיר / אזור ראשי <span class="req">*</span></label>
+            <select id="f-city">
+              <option value="">-- בחר --</option>
+              <option value="tel-aviv">תל אביב והמרכז</option>
+              <option value="jerusalem">ירושלים והסביבה</option>
+              <option value="haifa">חיפה והצפון</option>
+              <option value="rishon">ראשון לציון / רחובות</option>
+              <option value="beer-sheva">באר שבע והדרום</option>
+              <option value="netanya">נתניה / חדרה</option>
+              <option value="petah-tikva">פתח תקווה / בני ברק</option>
+              <option value="ashdod">אשדוד / אשקלון</option>
+            </select>
+            <div class="err-msg">יש לבחור עיר</div>
+          </div>
+          <div class="fg" id="fg-citylabel">
+            <label>אזורי פעילות <span class="req">*</span></label>
+            <input type="text" id="f-citylabel" placeholder="תל אביב, גוש דן, רמת גן">
+            <div class="hint">יופיע בכרטיס שלך</div>
+            <div class="err-msg">יש למלא אזורי פעילות</div>
+          </div>
+        </div>
+
+        <div class="form-row c2">
+          <div class="fg" id="fg-phone">
+            <label>טלפון <span class="req">*</span></label>
+            <input type="tel" id="f-phone" placeholder="052-111-2233" dir="ltr">
+            <div class="err-msg">יש למלא מספר טלפון</div>
+          </div>
+          <div class="fg">
+            <label>וואטסאפ (אם שונה)</label>
+            <input type="tel" id="f-wa" placeholder="052-111-2233" dir="ltr">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="fg" id="fg-email">
+            <label>אימייל ליצירת קשר <span class="req">*</span></label>
+            <input type="email" id="f-email" placeholder="cohen@example.com" dir="ltr">
+            <div class="hint">לא יוצג באתר — רק לתקשורת פנימית</div>
+            <div class="err-msg">יש למלא אימייל תקין</div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-next" onclick="nextStep(1)">המשך לשלב הבא ←</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="fstep" id="step2">
+        <div class="form-row">
+          <div class="fg" id="fg-desc">
+            <label>תיאור החברה <span class="req">*</span></label>
+            <textarea id="f-desc" placeholder="ספר על החברה שלך — ניסיון, שירותים, מה מייחד אותך..."></textarea>
+            <div class="hint">2-4 משפטים, יופיע ישירות בכרטיס</div>
+            <div class="err-msg">יש למלא תיאור</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="fg">
+            <label>שירותים שאתה מציע</label>
+            <div class="tags-grid">
+              <label class="tag-cb"><input type="checkbox" value="הובלת דירה"><span>📦 הובלת דירה</span></label>
+              <label class="tag-cb"><input type="checkbox" value="הובלת משרד"><span>🏢 הובלת משרד</span></label>
+              <label class="tag-cb"><input type="checkbox" value="אריזה"><span>📦 אריזה</span></label>
+              <label class="tag-cb"><input type="checkbox" value="פירוק והרכבה"><span>🔧 פירוק והרכבה</span></label>
+              <label class="tag-cb"><input type="checkbox" value="הובלה ארצית"><span>🗺️ הובלה ארצית</span></label>
+              <label class="tag-cb"><input type="checkbox" value="פינוי"><span>🗑️ פינוי</span></label>
+              <label class="tag-cb"><input type="checkbox" value="הובלה ואחסון"><span>🏭 אחסון</span></label>
+              <label class="tag-cb"><input type="checkbox" value="זמינות 24/7"><span>⏰ זמין 24/7</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="fg">
+            <label>תמונת פרופיל (תמונה שלך / של הצוות)</label>
+            <div class="photo-wrap">
+              <input type="text" id="f-photo" placeholder="https://... (URL לתמונה)" dir="ltr" oninput="livePhoto(this.value)">
+              <div class="photo-prev" id="photo-prev">👤</div>
+            </div>
+            <div class="hint">הדבק קישור לתמונה. ניתן להשתמש ב-Google Photos, Imgur וכו׳</div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-back" onclick="prevStep(2)">← חזרה</button>
+          <button class="btn-next" onclick="nextStep(2)">המשך לתצוגה מקדימה ←</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — PREVIEW + SUBMIT -->
+      <div class="fstep" id="step3">
+        <p style="font-size:14px;color:var(--gray);margin-bottom:16px">כך הכרטיס שלך יראה באתר:</p>
+
+        <div class="preview-card">
+          <div class="pc-banner" id="pc-banner">
+            <div class="pc-verified">✅ מאומת</div>
+          </div>
+          <div class="pc-body">
+            <div class="pc-top">
+              <div class="pc-logo" id="pc-logo"></div>
+              <div>
+                <div class="pc-name" id="pc-name">שם החברה</div>
+                <div class="pc-area" id="pc-area">📍 אזור פעילות</div>
+                <div class="pc-stars">★★★★★ <span style="font-size:11px;color:#9CA3AF">חדש</span></div>
+              </div>
+            </div>
+            <div class="pc-tags" id="pc-tags"></div>
+            <div class="pc-desc" id="pc-desc">תיאור החברה...</div>
+            <div class="pc-phone">📞 <span id="pc-phone">050-000-0000</span></div>
+          </div>
+        </div>
+
+        <div class="fg" style="margin-bottom:16px">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;text-transform:none;letter-spacing:0;font-size:14px;font-weight:600;color:var(--tx)">
+            <input type="checkbox" id="f-agree" style="width:18px;height:18px;accent-color:var(--or);flex-shrink:0;margin-top:2px">
+            <span>קראתי ואני מסכים ל<a href="#" style="color:var(--or)">תנאי השימוש</a> ומאשר שהפרטים שמסרתי נכונים</span>
+          </label>
+          <div class="err-msg" id="agree-err">יש לאשר את התנאים לפני השליחה</div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn-back" onclick="prevStep(3)">← חזרה לעריכה</button>
+          <button class="btn-next" onclick="submitForm()" id="submit-btn">✅ שלח בקשת הצטרפות</button>
+        </div>
+      </div>
+
+    </div><!-- fc-body -->
+
+    <!-- SUCCESS -->
+    <div id="success-screen">
+      <div class="suc-icon">🎉</div>
+      <h2 class="suc-h">הבקשה נשלחה בהצלחה!</h2>
+      <p class="suc-p">קיבלנו את פרטי החברה שלך. הפרופיל יאושר ויועלה לאתר תוך 24 שעות.</p>
+      <div class="suc-box" id="suc-box"></div>
+      <div class="suc-btns">
+        <button class="suc-btn1" onclick="window.location.href='/subscriber'">← צפה באתר</button>
+        <button class="suc-btn2" onclick="window.location.href='https://wa.me/972500000000?text=שלום%2C+שלחתי+בקשת+הצטרפות+למאגר+המובילים'">💬 וואטסאפ לבירור</button>
+      </div>
+    </div>
+  </div><!-- form-card -->
+
+  <!-- BENEFITS PANEL -->
+  <div class="benefits">
+    <div class="ben-head">
+      <div class="ben-h">מה כלול במנוי?</div>
+      <div class="ben-sub">הכל בחבילה אחת, ללא הפתעות</div>
+      <div class="ben-price"><div class="ben-num">₪299</div><div class="ben-per">/ חודש</div></div>
+    </div>
+    <div class="ben-body">
+      <div class="ben-item"><div class="ben-ic">📋</div><div class="ben-text"><strong>פרופיל עסקי מלא</strong><span>שם, תיאור, שירותים, תמונה</span></div></div>
+      <div class="ben-item"><div class="ben-ic">📞</div><div class="ben-text"><strong>מספר טלפון בולט</strong><span>לקוחות מתקשרים ישירות</span></div></div>
+      <div class="ben-item"><div class="ben-ic">💬</div><div class="ben-text"><strong>כפתור וואטסאפ</strong><span>לידים מהירים דרך הצ׳אט</span></div></div>
+      <div class="ben-item"><div class="ben-ic">⭐</div><div class="ben-text"><strong>בדג "מאומת"</strong><span>בונה אמון עם לקוחות</span></div></div>
+      <div class="ben-item"><div class="ben-ic">🔍</div><div class="ben-text"><strong>חיפוש לפי עיר</strong><span>מופיעים לקוחות רלוונטיים בלבד</span></div></div>
+      <div class="ben-item"><div class="ben-ic">🚀</div><div class="ben-text"><strong>קמפיין PPC פעיל</strong><span>אנחנו מביאים את התנועה</span></div></div>
+      <div class="ben-item"><div class="ben-ic">✏️</div><div class="ben-text"><strong>עדכון פרטים בכל עת</strong><span>שינויים מהירים דרך הניהול</span></div></div>
+      <div class="ben-item"><div class="ben-ic">🔓</div><div class="ben-text"><strong>ביטול חופשי</strong><span>ללא התחייבות, ללא קנסות</span></div></div>
+    </div>
+    <button class="ben-cta" onclick="document.getElementById('f-name').focus();window.scrollTo({top:0,behavior:'smooth'})">התחל הרשמה עכשיו ←</button>
+    <div class="ben-note">אין עמלות על שיחות · תשלום רק על המנוי</div>
+  </div>
+
+</div><!-- main -->
+
+<script>
+let currentStep = 1;
+
+// ── STEP NAVIGATION ──
+function setStep(n){
+  document.querySelectorAll('.fstep').forEach((s,i)=>s.classList.toggle('show', i+1===n));
+  [1,2,3].forEach(i=>{
+    const el = document.getElementById('stp'+i);
+    el.classList.remove('active','done');
+    if(i<n) el.classList.add('done');
+    if(i===n) el.classList.add('active');
+  });
+  currentStep = n;
+  if(n===3) buildPreview();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextStep(from){
+  if(from===1 && !validateStep1()) return;
+  if(from===2 && !validateStep2()) return;
+  setStep(from+1);
+}
+function prevStep(from){ setStep(from-1); }
+
+// ── VALIDATION ──
+function req(id, fieldId){
+  const fg = document.getElementById(fieldId||'fg-'+id.replace('f-',''));
+  const val = document.getElementById(id).value.trim();
+  if(!val){ fg.classList.add('invalid'); return false; }
+  fg.classList.remove('invalid'); return true;
+}
+
+function validateStep1(){
+  const ok = [
+    req('f-name','fg-name'),
+    req('f-city','fg-city'),
+    req('f-citylabel','fg-citylabel'),
+    req('f-phone','fg-phone'),
+  ];
+  const email = document.getElementById('f-email').value.trim();
+  const emailOk = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(!emailOk) document.getElementById('fg-email').classList.add('invalid');
+  else document.getElementById('fg-email').classList.remove('invalid');
+  return ok.every(Boolean) && emailOk;
+}
+
+function validateStep2(){
+  return req('f-desc','fg-desc');
+}
+
+// ── LIVE PHOTO PREVIEW ──
+function livePhoto(url){
+  const prev = document.getElementById('photo-prev');
+  if(url){ prev.innerHTML=`<img src="${url}" onerror="this.parentElement.innerHTML='❌'">` }
+  else { prev.innerHTML='👤' }
+}
+
+// ── BUILD PREVIEW ──
+function buildPreview(){
+  const name = document.getElementById('f-name').value.trim();
+  const city = document.getElementById('f-citylabel').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+  const photo = document.getElementById('f-photo').value.trim();
+  const initials = document.getElementById('f-initials').value.trim() || name.slice(0,2);
+  const tags = [...document.querySelectorAll('.tag-cb input:checked')].map(c=>c.value);
+
+  document.getElementById('pc-name').textContent = name || 'שם החברה';
+  document.getElementById('pc-area').textContent = '📍 ' + (city || 'אזור פעילות');
+  document.getElementById('pc-phone').textContent = phone || '050-000-0000';
+  document.getElementById('pc-desc').textContent = desc || 'תיאור החברה...';
+
+  const logo = document.getElementById('pc-logo');
+  logo.innerHTML = photo ? `<img src="${photo}" style="width:100%;height:100%;object-fit:cover">` : initials;
+
+  document.getElementById('pc-tags').innerHTML = tags.map(t=>`<div class="pc-tag">${t}</div>`).join('') ||
+    '<div class="pc-tag" style="color:#9CA3AF;background:#F3F4F6">לא נבחרו שירותים</div>';
+}
+
+// ── SUBMIT ──
+function submitForm(){
+  const agree = document.getElementById('f-agree').checked;
+  if(!agree){ document.getElementById('agree-err').style.display='block'; return; }
+  document.getElementById('agree-err').style.display='none';
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ שולח...';
+
+  const phone = document.getElementById('f-phone').value.trim();
+  const waRaw = document.getElementById('f-wa').value.trim() || phone;
+  const waCleaned = '972' + waRaw.replace(/^0/,'').replace(/[-\s]/g,'');
+  const tags = [...document.querySelectorAll('.tag-cb input:checked')].map(c=>c.value);
+  const name = document.getElementById('f-name').value.trim();
+  const initials = document.getElementById('f-initials').value.trim() || name.slice(0,2);
+
+  const mover = {
+    id: Date.now(),
+    name,
+    initials,
+    city: document.getElementById('f-city').value,
+    cityLabel: document.getElementById('f-citylabel').value.trim(),
+    phone,
+    wa: waCleaned,
+    email: document.getElementById('f-email').value.trim(),
+    desc: document.getElementById('f-desc').value.trim(),
+    tags,
+    photo: document.getElementById('f-photo').value.trim(),
+    img: '',
+    rating: 5.0,
+    reviews: 0,
+    featured: false,
+    available: true,
+    status: 'pending',
+    submittedAt: new Date().toISOString()
+  };
+
+  // Save to pending queue
+  const pending = JSON.parse(localStorage.getItem('hovala_pending')||'[]');
+  pending.push(mover);
+  localStorage.setItem('hovala_pending', JSON.stringify(pending));
+
+  // Show success
+  document.querySelector('.fc-head').style.display = 'none';
+  document.querySelector('.fc-body').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  document.getElementById('suc-box').innerHTML =
+    `<b>שם:</b> ${mover.name}<br>` +
+    `<b>אזור:</b> ${mover.cityLabel}<br>` +
+    `<b>טלפון:</b> ${mover.phone}<br>` +
+    `<b>אימייל:</b> ${mover.email}`;
+}
+</script>
+</body>
+</html>
