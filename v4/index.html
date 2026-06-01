@@ -7,8 +7,14 @@
 <meta name="description" content="חברת ההובלות הגדולה בישראל. 15% מתחת למחיר השוק. קבל הצעת מחיר מותאמת אישית.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18181285321"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','AW-18181285321')</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18190152555"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18190152555');
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -403,7 +409,7 @@ footer{background:#070F1C;padding:28px 24px}
   <div class="logo">הובלה <span>בקליק</span></div>
   <div class="top-btns">
     <a href="https://wa.me/972552736930?text=שלום%2C+אני+מעוניין+בהצעת+מחיר+להובלה" class="t-wa" target="_blank" rel="noopener">💬 וואטסאפ</a>
-    <a href="tel:0552736930" class="t-call">📞 055-273-6930</a>
+    <a href="tel:0552736930" class="t-call" onclick="fireCallPixel()">📞 055-273-6930</a>
   </div>
 </div>
 
@@ -677,7 +683,7 @@ footer{background:#070F1C;padding:28px 24px}
   <p>מלאו את הטופס למעלה — נחזור אליכם עם המחיר הכי זול בארץ.</p>
   <div class="cta-btns">
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" class="bwa" style="background:var(--or)">קבל הצעת מחיר</a>
-    <a href="tel:0552736930" class="bow">📞 055-273-6930</a>
+    <a href="tel:0552736930" class="bow" onclick="fireCallPixel()">📞 055-273-6930</a>
   </div>
 </section>
 
@@ -727,7 +733,7 @@ async function submitForm() {
   };
 
   try { await fetch(WH + '?' + new URLSearchParams(ld)); } catch(e) {}
-  gtag('event','conversion',{'send_to':'AW-18181285321/Rk9_CNali7McEMnLwd1D'});
+  gtag('event','conversion',{'send_to':'AW-18190152555/9vymCLTnsLQcEOvm3uFD'});
 
   document.getElementById('form-body').style.display = 'none';
   document.getElementById('success').style.display = 'block';
@@ -746,6 +752,10 @@ function faq(el) {
   const it = el.parentElement, open = it.classList.contains('open');
   document.querySelectorAll('.fi').forEach(i => i.classList.remove('open'));
   if (!open) it.classList.add('open');
+}
+
+function fireCallPixel() {
+  gtag('event', 'conversion', {'send_to': 'AW-18190152555/9vymCLTnsLQcEOvm3uFD'});
 }
 
 const io = new IntersectionObserver(es => es.forEach(e => {
